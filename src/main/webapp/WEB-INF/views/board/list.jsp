@@ -9,18 +9,12 @@
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">게시판</h1>
-	<p class="mb-4">
-		DataTables is a third party plugin that is used to generate the demo
-		table below. For more information about DataTables, please visit the <a
-			target="_blank" href="https://datatables.net">official DataTables
-			documentation</a>.
-	</p>
 
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary" >
-				게시판
+			<h6 class="m-0 font-weight-bold text-primary">
+				자유게시판
 				<button id="regBtn" type="button" class="btn btn-xs float-right">게시글
 					작성</button>
 			</h6>
@@ -43,9 +37,12 @@
 						<c:forEach items="${list}" var="board">
 							<tr>
 								<td><c:out value="${board.bno}" /></td>
-								<td><c:out value="${board.title}" /></td>
+								<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
+										<c:out value="${board.title}" />
+								</a></td>
 								<td><c:out value="${board.writer}" /></td>
-								<td><fmt:formatDate value="${board.regdate}" /></td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd"
+										value="${board.regdate}" /></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"
 										value="${board.updateDate}" /></td>
 								<td><c:out value="${board.ipAddress}" /></td>
@@ -66,8 +63,8 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var result = '<c:out value="${result}"/>';
-		
-		$("#regBtn").on("click", function(){
+
+		$("#regBtn").on("click", function() {
 			self.location = "/board/insert";
 		});
 	});

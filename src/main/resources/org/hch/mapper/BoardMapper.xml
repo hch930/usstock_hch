@@ -24,4 +24,22 @@ select * from tbl_board where bno > 0
 		,#{writer}
 		,SYS_CONTEXT ('USERENV', 'IP_ADDRESS'))
 </insert>
+
+<select id="read" resultType="org.hch.domain.BoardVO">
+	select * from tbl_board where bno = #{bno}
+</select>
+
+<update id="update">
+	update tbl_board
+	set title = #{title}
+	content = #{content}
+	writer = #{writer}
+	updateDate = sysdate
+	where bno = #{bno}
+</update>
+
+<delete id="delete">
+	delete from tbl_board
+	where bno = #{bno} 
+</delete>
 </mapper>

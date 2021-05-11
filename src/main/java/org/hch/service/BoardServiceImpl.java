@@ -26,4 +26,22 @@ public class BoardServiceImpl implements BoardService{
 		log.info("insert: " + board);
 		mapper.insert(board);
 	}
+	
+	@Override
+	public BoardVO get(Long bno) {
+		log.info("get");
+		return mapper.read(bno);
+	}
+	
+	@Override
+	public boolean remove(Long bno) {
+		log.info("delete");
+		return mapper.delete(bno) == 1;
+	}
+	
+	@Override
+	public boolean modify(BoardVO board) {
+		log.info("d");
+		return mapper.update(board) == 1;
+	}
 }
