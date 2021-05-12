@@ -32,9 +32,9 @@ select * from tbl_board where bno > 0
 <update id="update">
 	update tbl_board
 	set title = #{title}
-	content = #{content}
-	writer = #{writer}
-	updateDate = sysdate
+	,content = #{content}
+	,writer = #{writer}
+	,updateDate = sysdate
 	where bno = #{bno}
 </update>
 

@@ -38,9 +38,9 @@ public class BoardController {
 	public void insert() {
 	}
 	
-	@GetMapping("/get")
+	@GetMapping({"/get","/modify"})
 	public void get(Long bno, Model model) {
-		log.info("/get");
+		log.info("/get or /modify");
 		model.addAttribute("board", service.get(bno));
 	}
 	

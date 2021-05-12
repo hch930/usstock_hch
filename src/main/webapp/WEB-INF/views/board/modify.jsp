@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="../includes/header.jsp"%>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -17,19 +16,18 @@
 			<h6 class="m-0 font-weight-bold text-primary">게시글</h6>
 		</div>
 		<div class="card-body">
-		<form role="form" action="/board/remove" method="post">
+		<form role="form" action="/board/modify" method="post">
 			<div class="form-group">
 				<label>제목</label> <input class="form-control" name="bno"
 					value='<c:out value="${board.bno}"/>' readonly="readonly">
 			</div>
 			<div class="form-group">
 				<label>제목</label> <input class="form-control" name="title"
-					value='<c:out value="${board.title}"/>' readonly="readonly">
+					value='<c:out value="${board.title}"/>'>
 			</div>
 			<div class="form-group">
 				<label>내용</label>
-				<textarea class="form-control" rows="3" name="content" 
-				readonly="readonly"><c:out value="${board.content}" /></textarea>
+				<textarea class="form-control" rows="3" name="content"><c:out value="${board.content}" /></textarea>
 			</div>
 			<div class="form-group">
 				<label>작성자</label> <input class="form-control" name="writer"
@@ -39,13 +37,9 @@
 				<label>ip</label> <input class="form-control" name="ipAddress"
 					value='<c:out value="${board.ipAddress}"/>' readonly="readonly">
 			</div>
-			<a href="#" onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'"
-				class="btn btn-light btn-icon-split"> <span
-				class="icon text-gray-600"> <i class="fas fa-arrow-right"></i>
-			</span> <span class="text">수정</span></a> 
-			
-			<button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
-			</form>
+			<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
+			<button type="submit" data-oper='list' class="btn btn-info">리스트</button>
+		</form>
 		</div>
 	</div>
 
