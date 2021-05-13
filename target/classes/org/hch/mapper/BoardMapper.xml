@@ -42,4 +42,5 @@ select * from tbl_board where bno > 0
 	delete from tbl_board
 	where bno = #{bno} 
 </delete>
+
 </mapper>
