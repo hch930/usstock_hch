@@ -4,18 +4,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="../includes/header.jsp"%>
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">게시글 등록</h1>
-
-	<!-- DataTales Example -->
-	<div class="card shadow mb-4">
-		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">게시글 등록</h6>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">글쓰기</h1>
 		</div>
-		<div class="card-body">
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">글쓰기</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
 			<form role="form" id="insertForm" action="/board/insert"
 				method="post">
 				<div class="form-group">
@@ -28,15 +29,8 @@
 				<div class="form-group">
 					<label>작성자</label> <input class="form-control" name="writer">
 				</div>
-				<a href="#" onclick="history.back()"
-					class="btn btn-light btn-icon-split"> <span
-					class="icon text-gray-600"> <i class="fas fa-arrow-right"></i>
-				</span> <span class="text">취소</span></a> 
-				<a href="javascript:;" onclick="document.getElementById('insertForm').submit()"
-					class="btn btn-light btn-icon-split"> <span
-					class="icon text-gray-600"> <i class="fas fa-arrow-right"></i>
-				</span> <span class="text">등록</span>
-				</a>
+				<button type="button" class="btn btn-default" onclick="history.back()">취소</button>
+				<button type="submit" class="btn btn-default">작성</button>
 			</form>
 		</div>
 	</div>
