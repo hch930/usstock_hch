@@ -64,7 +64,9 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var result = '<c:out value="${result}"/>';
-
+		
+		history.replaceState({},null,null);
+		
 		$("#regBtn").on("click", function() {
 			self.location = "/board/insert";
 		});

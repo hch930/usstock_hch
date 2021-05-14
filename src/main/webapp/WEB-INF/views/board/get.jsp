@@ -5,6 +5,10 @@
 
 <%@ include file="../includes/header.jsp"%>
 
+<style>
+ form{display:inline}
+</style>
+
 <div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">게시판</h1>
@@ -18,6 +22,7 @@
 				<div class="panel-heading">게시판</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
+			<form role="form" action="/board/remove" method="post">
 			<div class="form-group">
 				<label>제목</label> <input class="form-control" name="bno"
 					value='<c:out value="${board.bno}"/>' readonly="readonly">
@@ -39,8 +44,9 @@
 				<label>ip</label> <input class="form-control" name="ipAddress"
 					value='<c:out value="${board.ipAddress}"/>' readonly="readonly">
 			</div>
-			<button data-oper='modify' class="btn btn-default" onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">수정</button>
 			<button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
+			</form>
+			<button id="modify" data-oper='modify' class="btn btn-default" onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">수정</button>
 		</div>
 	</div>
 
