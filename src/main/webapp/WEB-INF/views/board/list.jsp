@@ -20,7 +20,7 @@
 				<button id='regBtn' type="button" class="btn btn-xs pull-right">
 				글쓰기</button></div>
 				<!-- /.panel-heading -->
-				<div class="panel-body">
+				<div class="panel-body">	
 					<table width="100%"
 						class="table table-striped table-bordered table-hover"
 						id="dataTables-example">

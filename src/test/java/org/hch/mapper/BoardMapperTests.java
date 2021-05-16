@@ -1,6 +1,9 @@
 package org.hch.mapper;
 
+import java.util.List;
+
 import org.hch.domain.BoardVO;
+import org.hch.domain.Criteria;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +20,23 @@ public class BoardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
 	
+//	@Test
+//	public void testInsert() {
+//		BoardVO board = new BoardVO();
+//		board.setTitle("새로 작성하는 글");
+//		board.setContent("새로 작성하는 내용");
+//		board.setWriter("홍충현");
+//		
+//		mapper.insert(board);
+//		log.info(board);
+//	}
+	
 	@Test
-	public void testInsert() {
-		BoardVO board = new BoardVO();
-		board.setTitle("새로 작성하는 글");
-		board.setContent("새로 작성하는 내용");
-		board.setWriter("홍충현");
-		
-		mapper.insert(board);
-		log.info(board);
+	public void testPaging() {
+		Criteria cri = new Criteria();
+		cri.setPageNum(3);
+		cri.setAmount(10);
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		list.forEach(board -> log.info(board));
 	}
 }
