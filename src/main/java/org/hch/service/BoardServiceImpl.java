@@ -3,6 +3,7 @@ package org.hch.service;
 import java.util.List;
 
 import org.hch.domain.BoardVO;
+import org.hch.domain.Criteria;
 import org.hch.mapper.BoardMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,16 @@ import lombok.extern.log4j.Log4j;
 public class BoardServiceImpl implements BoardService{
 	private BoardMapper mapper;
 	
+//	@Override
+//	public List<BoardVO> getList() {
+//		log.info("getList");
+//		return mapper.getList();
+//	}
+	
 	@Override
-	public List<BoardVO> getList() {
-		log.info("getList");
-		return mapper.getList();
+	public List<BoardVO> getList(Criteria cri) {
+		log.info("get List with criteria: " + cri);
+		return mapper.getListWithPaging(cri);
 	}
 	
 	@Override

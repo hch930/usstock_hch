@@ -1,6 +1,7 @@
 package org.hch.controller;
 
 import org.hch.domain.BoardVO;
+import org.hch.domain.Criteria;
 import org.hch.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +21,16 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	private BoardService service;
 	
+//	@GetMapping("/list")
+//	public void list(Model model) {
+//		log.info("list");
+//		model.addAttribute("list", service.getList());
+//	}
+	
 	@GetMapping("/list")
-	public void list(Model model) {
-		log.info("list");
-		model.addAttribute("list", service.getList());
+	public void list(Criteria cri, Model model) {
+		log.info("list: " + cri);
+		model.addAttribute("list", service.getList(cri));
 	}
 	
 	@PostMapping("/insert")
