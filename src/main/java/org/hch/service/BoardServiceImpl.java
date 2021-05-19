@@ -51,4 +51,10 @@ public class BoardServiceImpl implements BoardService{
 		log.info("modify");
 		return mapper.update(board) == 1;
 	}
+	
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("getTotalCount");
+		return mapper.getTotalCount(cri);
+	}
 }

@@ -53,5 +53,8 @@
 		<filter-name>encoding</filter-name>
 		<servlet-name>appServlet</servlet-name>
 	</filter-mapping>
-
+	
+	<welcome-file-list>
+		<welcome-file>board/list.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

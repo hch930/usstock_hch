@@ -38,7 +38,7 @@
 							<c:forEach items="${list}" var="board">
 								<tr>
 									<td><c:out value="${board.bno}" /></td>
-									<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
+									<td><a class="move" href='<c:out value="${board.bno}"/>'>
 											<c:out value="${board.title}" />
 									</a></td>
 									<td><c:out value="${board.writer}" /></td>
@@ -51,6 +51,23 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<div class='pull-right'>
+						<ul class="pagination">
+							<c:if test="${pageInfo.prev}">
+								<li class="paginate_button previous"><a href="${pageInfo.startPage -1}">이전</a>
+								</li>
+							</c:if>
+							<c:forEach var="num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+								<li class='paginate_button ${pageInfo.cri.pageNum == num ? "active":""}'>
+								<a href="${num}"><c:out value="${num}"/></a>
+							</li>	
+							</c:forEach>
+							<c:if test="${pageInfo.next}">
+								<li class="paginate_button next"><a href="${pageInfo.endPage +1}">다음</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -59,6 +76,11 @@
 
 </div>
 <!-- End of Main Content -->
+
+<form id="actionForm" action="/board/list" method="get">
+	<input type="hidden" name="pageNum" value="${pageInfo.cri.pageNum}">
+	<input type="hidden" name="amount" value="${pageInfo.cri.amount}">
+</form>
 
 <!-- 새로고침을 통한 도배 방지 -->
 <script type="text/javascript">
@@ -69,6 +91,22 @@
 		
 		$("#regBtn").on("click", function() {
 			self.location = "/board/insert";
+		});
+		
+		var actionForm = $("#actionForm");
+		
+		$(".paginate_button a").on("click", function(e){
+			e.preventDefault();
+			console.log('click');
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		});
+		
+		$(".move").on("click", function(e){
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
+			actionForm.attr("action","/board/get");
+			actionForm.submit();
 		});
 	});
 </script>

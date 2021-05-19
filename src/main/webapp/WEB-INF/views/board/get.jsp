@@ -45,8 +45,11 @@
 					value='<c:out value="${board.ipAddress}"/>' readonly="readonly">
 			</div>
 			<button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
+			
+			<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
 			</form>
-			<button id="modify" data-oper='modify' class="btn btn-default" onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">수정</button>
+			<button data-oper='modify' class="btn btn-default">수정</button>
 		</div>
 	</div>
 
@@ -55,5 +58,20 @@
 
 </div>
 <!-- End of Main Content -->
+
+<form id="operForm" action="/board/modify" method="get">
+	<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno}"/>'>
+	<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+	<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+</form>
+
+<script type="text/javascript">
+$(document).ready(function(e){
+	var operForm = $("#operForm");
+	$("button[data-oper='modify']").on("click", function(e){
+		operForm.attr("action", "/board/modify").submit();
+	});
+});
+</script>
 
 <%@include file="../includes/footer.jsp"%>

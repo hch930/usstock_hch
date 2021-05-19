@@ -6,7 +6,7 @@
 <%@ include file="../includes/header.jsp"%>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">글쓰기</h1>
+		<h1 class="page-header">글수정</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
@@ -14,7 +14,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">글쓰기</div>
+			<div class="panel-heading">글수정</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<form role="form" action="/board/modify" method="post">
@@ -39,6 +39,10 @@
 						<label>ip</label> <input class="form-control" name="ipAddress"
 							value='<c:out value="${board.ipAddress}"/>' readonly="readonly">
 					</div>
+					
+					<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+					<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+					
 					<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
 					<button type="submit" data-oper='list' class="btn btn-info">리스트</button>
 				</form>
