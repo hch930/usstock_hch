@@ -51,6 +51,26 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<div class="row">
+						<div class="col-lg-12">
+						
+						<form id="searchForm" action="/board/list" method="get">
+							<select name="type">
+								<option value="">선택</option>
+								<option value="T">제목</option>
+								<option value="C">내용</option>
+								<option value="W">작성자</option>
+								<option value="TC">제목 or 내용</option>
+								<option value="TW">제목 or 작성자</option>
+								<option value="TWC">제목 or 내용 or 작성자</option>
+							</select>
+							<input type='text' name='keyword'/>
+							<input type="hidden" name="pageNum" value="${pageInfo.cri.pageNum}">
+							<input type="hidden" name="amount" value="${pageInfo.cri.amount}">
+							<button class="btn btn-default">검색</button>
+						</form>
+						</div>
+					</div>
 					<div class='pull-right'>
 						<ul class="pagination">
 							<c:if test="${pageInfo.prev}">
@@ -107,6 +127,25 @@
 			actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
 			actionForm.attr("action","/board/get");
 			actionForm.submit();
+		});
+		
+		var searchForm = $("#searchForm");
+		
+		$("#searchForm button").on("click", function(e){
+			if(!searchForm.find("option:selected").val()){
+				alert("검색종류를 선택하세요");
+				return false;
+			}
+			
+			if(!searchForm.find("input[name='keyword']").val()){
+				alert("검색내용을 입력하세요");
+				return false;
+			}
+			
+			searchForm.find("input[name='pageNum']").val("1");
+			e.preventDefault();
+			
+			searchForm.submit(); 
 		});
 	});
 </script>
