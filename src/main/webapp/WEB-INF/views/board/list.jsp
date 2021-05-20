@@ -56,17 +56,17 @@
 						
 						<form id="searchForm" action="/board/list" method="get">
 							<select name="type">
-								<option value="">선택</option>
-								<option value="T">제목</option>
-								<option value="C">내용</option>
-								<option value="W">작성자</option>
-								<option value="TC">제목 or 내용</option>
-								<option value="TW">제목 or 작성자</option>
-								<option value="TWC">제목 or 내용 or 작성자</option>
+								<option value=""<c:out value="${pageInfo.cri.type == null?'selected':''}"/>>선택</option>
+								<option value="T"<c:out value="${pageInfo.cri.type eq 'T'?'selected':''}"/>>제목</option>
+								<option value="C"<c:out value="${pageInfo.cri.type eq 'C'?'selected':''}"/>>내용</option>
+								<option value="W"<c:out value="${pageInfo.cri.type eq 'W'?'selected':''}"/>>작성자</option>
+								<option value="TC"<c:out value="${pageInfo.cri.type eq 'TC'?'selected':''}"/>>제목 or 내용</option>
+								<option value="TW"<c:out value="${pageInfo.cri.type eq 'TW'?'selected':''}"/>>제목 or 작성자</option>
+								<option value="TWC"<c:out value="${pageInfo.cri.type eq 'TWC'?'selected':''}"/>>제목 or 내용 or 작성자</option>
 							</select>
-							<input type='text' name='keyword'/>
-							<input type="hidden" name="pageNum" value="${pageInfo.cri.pageNum}">
-							<input type="hidden" name="amount" value="${pageInfo.cri.amount}">
+							<input type='text' name='keyword' value='<c:out value="${pageInfo.cri.keyword}"/>'/>
+							<input type="hidden" name="pageNum" value='<c:out value="${pageInfo.cri.pageNum}"/>'/>
+							<input type="hidden" name="amount" value='<c:out value="${pageInfo.cri.amount}"/>'/>
 							<button class="btn btn-default">검색</button>
 						</form>
 						</div>
@@ -100,6 +100,8 @@
 <form id="actionForm" action="/board/list" method="get">
 	<input type="hidden" name="pageNum" value="${pageInfo.cri.pageNum}">
 	<input type="hidden" name="amount" value="${pageInfo.cri.amount}">
+	<input type='hidden' name='type' value='<c:out value="${pageInfo.cri.type}"/>'/>
+	<input type='hidden' name='keyword' value='<c:out value="${pageInfo.cri.keyword}"/>'/>
 </form>
 
 <!-- 새로고침을 통한 도배 방지 -->
