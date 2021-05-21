@@ -5,6 +5,7 @@
 
 <%@ include file="../includes/header.jsp"%>
 
+
 <style>
  form{display:inline}
 </style>
@@ -68,6 +69,23 @@
 	<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'/>
 	<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'/>
 </form>
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+<script type="text/javascript">
+console.log("=========");
+console.log("JS TEST");
+
+var bnoValue = '<c:out value="${board.bno}"/>';
+
+replyService.add(
+		{reply:"JS TEST", replyer:"tester", bno:bnoValue}
+		,
+		function(result){
+			alert("RESULT: " + result);
+		}
+);
+</script>
 
 <script type="text/javascript">
 $(document).ready(function(e){
