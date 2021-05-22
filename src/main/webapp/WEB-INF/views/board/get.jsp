@@ -5,6 +5,7 @@
 
 <%@ include file="../includes/header.jsp"%>
 
+
 <style>
  form{display:inline}
 </style>
@@ -48,6 +49,8 @@
 			
 			<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
 			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+			<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'/>
+			<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'/>
 			</form>
 			<button data-oper='modify' class="btn btn-default">수정</button>
 		</div>
@@ -67,11 +70,35 @@
 	<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'/>
 </form>
 
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+<script type="text/javascript">
+console.log("=========");
+console.log("JS TEST");
+
+var bnoValue = '<c:out value="${board.bno}"/>';
+
+replyService.add(
+		{reply:"JS TEST", replyer:"tester", bno:bnoValue}
+		,
+		function(result){
+			alert("RESULT: " + result);
+		}
+);
+</script>
+
 <script type="text/javascript">
 $(document).ready(function(e){
 	var operForm = $("#operForm");
 	$("button[data-oper='modify']").on("click", function(e){
 		operForm.attr("action", "/board/modify").submit();
+	});
+	
+	var formObj = $("form");
+	
+	$("button[data-oper='remove']").on("click", function(e){
+		
+		formObj.submit();
 	});
 });
 </script>
