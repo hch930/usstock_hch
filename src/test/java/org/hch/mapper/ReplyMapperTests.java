@@ -19,12 +19,12 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ReplyMapperTests {
 	
-	private Long[] bnoArr = {1572858L, 1572859L, 1572860L, 1572862L, 1572863L};
+	private Long[] bnoArr = {327695L, 327692L, 327690L, 327688L, 327687L};
 	
 	@Setter(onMethod_ = {@Autowired})
 	private ReplyMapper mapper;
-	
-/*	@Test
+/*	
+	@Test
 	public void testCreate() {
 		IntStream.rangeClosed(1, 10).forEach(i -> {
 			ReplyVO vo = new ReplyVO();
@@ -36,37 +36,41 @@ public class ReplyMapperTests {
 			mapper.insert(vo);
 		});
 	}
-*/	
+	
+	
+
+	@Test
+	public void testRead() {
+		Long targetRno = 4L;
+		ReplyVO vo = mapper.read(targetRno);
+		log.info(vo);
+	}
+
+	
+	@Test
+	public void testDelete() {
+		Long targetRno = 4L;
+		mapper.delete(targetRno);
+	}
+	
+	
 	@Test
 	public void testMapper() {
 		log.info(mapper);
 	}
-	
-	/*
-	@Test
-	public void testRead() {
-		Long targetRno = 16L;
-		ReplyVO vo = mapper.read(targetRno);
-		log.info(vo);
-	}
-	
-	@Test
-	public void testDelete() {
-		Long targetRno = 16L;
-		mapper.delete(targetRno);
-	}
-	
+			
 	@Test
 	public void testUpdate() {
-		Long targetRno = 17L;
+		Long targetRno = 6L;
 		ReplyVO vo = mapper.read(targetRno);
 		vo.setReply("Update Reply ");
 		int count = mapper.update(vo);
 		
 		log.info("UPDATE COUNT: " + count);
 	}
-	*/
-	
+*/
+
+	//327695L
 	@Test
 	public void testList() {
 		Criteria cri = new Criteria();
