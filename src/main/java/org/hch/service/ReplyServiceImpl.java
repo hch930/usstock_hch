@@ -3,6 +3,7 @@ package org.hch.service;
 import java.util.List;
 
 import org.hch.domain.Criteria;
+import org.hch.domain.ReplyPageDTO;
 import org.hch.domain.ReplyVO;
 import org.hch.mapper.ReplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,12 @@ public class ReplyServiceImpl implements ReplyService{
 	public List<ReplyVO> getList(Criteria cri, Long bno) {
 		log.info("get Reply List of a Board " + bno);
 		return mapper.getListWithPaging(cri, bno);
+	}
+	
+	@Override
+	public ReplyPageDTO getListPage(Criteria cri, Long bno) {
+		return new ReplyPageDTO(
+				mapper.getCountByBno(bno),
+				mapper.getListWithPaging(cri, bno));
 	}
 }
