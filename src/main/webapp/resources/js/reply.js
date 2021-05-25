@@ -1,6 +1,6 @@
 console.log("reply Module......");
 var replyService= (function(){
-	function add(reply, callback){
+	function add(reply, callback, error){
 		console.log("reply..............");
 		$.ajax({
 			type : 'post',
