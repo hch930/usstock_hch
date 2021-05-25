@@ -16,6 +16,8 @@ public class BoardVO {
 	private Date updateDate;
 	private String ipAddress;
 	
+	private int replyCnt;
+	
 	public String getIpAddress() {
 		return ipAddress.substring(0, ipAddress.lastIndexOf(".")-2);
 	}
