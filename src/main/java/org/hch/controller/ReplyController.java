@@ -3,6 +3,7 @@ package org.hch.controller;
 import java.util.List;
 
 import org.hch.domain.Criteria;
+import org.hch.domain.ReplyPageDTO;
 import org.hch.domain.ReplyVO;
 import org.hch.service.ReplyService;
 import org.springframework.http.HttpStatus;
@@ -41,11 +42,10 @@ public class ReplyController {
 	
 	@GetMapping(value = "/pages/{bno}/{page}", produces = {MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno){
-		log.info("getList........");
+	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno){
 		Criteria cri = new Criteria(page, 10);
 		log.info(cri);
-		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{rno}", produces = {MediaType.APPLICATION_XML_VALUE,

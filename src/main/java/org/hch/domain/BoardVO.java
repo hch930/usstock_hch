@@ -5,8 +5,8 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 public class BoardVO {
 	private Long bno;
 	private String title;
@@ -15,6 +15,8 @@ public class BoardVO {
 	private Date regdate;
 	private Date updateDate;
 	private String ipAddress;
+	
+	private int replyCnt;
 	
 	public String getIpAddress() {
 		return ipAddress.substring(0, ipAddress.lastIndexOf(".")-2);
