@@ -34,6 +34,19 @@ foreign key(bno) references tbl_board(bno);
 
 create index idx_reply on tbl_reply(bno desc, rno asc);
 
+---------------------------------------------- 첨부파일 정보 테이블 생성  -----------------------------------------------
+create table tbl_attach(
+	uuid varchar2(100) not null,
+	uploadPath varchar2(200) not null,
+	fileName varchar2(100) not null,
+	fileType char(1) default 'I',
+	bno number(10,0)
+);
+
+alter table tbl_attach add constraint pk_attach primary key(uuid);
+
+alter table tbl_attach add constraint fk_board_attach foreign key(bno) references tbl_board(bno);
+
 ---------------------------------------------------- 댓글 총 갯수 ------------------------------------------------------
 
 alter table tbl_board add(replycnt number default 0);
