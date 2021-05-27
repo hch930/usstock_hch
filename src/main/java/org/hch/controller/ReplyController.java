@@ -1,7 +1,5 @@
 package org.hch.controller;
 
-import java.util.List;
-
 import org.hch.domain.Criteria;
 import org.hch.domain.ReplyPageDTO;
 import org.hch.domain.ReplyVO;
@@ -36,8 +34,7 @@ public class ReplyController {
 		
 		log.info("Reply INSERT COUNT: " + insertCount);
 		
-		return insertCount == 1? new ResponseEntity<>("success", HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		return insertCount == 1? new ResponseEntity<>("success", HttpStatus.OK): new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@GetMapping(value = "/pages/{bno}/{page}", produces = {MediaType.APPLICATION_XML_VALUE,
