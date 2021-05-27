@@ -10,6 +10,7 @@ public interface BoardMapper {
 	public List<BoardVO> getListWithPaging(Criteria cri);
 	public BoardVO read(Long bno);
 	public void insert(BoardVO board);
+	public void insertSelectKey(BoardVO board);
 	public int update(BoardVO baord);
 	public int delete(Long bno);
 	public int getTotalCount(Criteria cri);

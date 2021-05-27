@@ -2,10 +2,13 @@ package org.hch.service;
 
 import java.util.List;
 
+import org.hch.domain.BoardAttachVO;
 import org.hch.domain.BoardVO;
 import org.hch.domain.Criteria;
+import org.hch.mapper.BoardAttachMapper;
 import org.hch.mapper.BoardMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -15,6 +18,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService{
 	private BoardMapper mapper;
+	
+	private BoardAttachMapper attachMapper;
 	
 //	@Override
 //	public List<BoardVO> getList() {
@@ -27,11 +32,20 @@ public class BoardServiceImpl implements BoardService{
 		log.info("get List with criteria: " + cri);
 		return mapper.getListWithPaging(cri);
 	}
-	
+		
+	@Transactional
 	@Override
 	public void insert(BoardVO board) {
 		log.info("insert: " + board);
-		mapper.insert(board);
+		mapper.insertSelectKey(board);
+		if(board.getAttachList() == null || board.getAttachList().size() <= 0) {
+			return;
+		}
+		
+		board.getAttachList().forEach(attach ->{
+			attach.setBno(board.getBno());
+			attachMapper.insert(attach);
+		});
 	}
 	
 	@Override
@@ -56,5 +70,11 @@ public class BoardServiceImpl implements BoardService{
 	public int getTotal(Criteria cri) {
 		log.info("getTotalCount");
 		return mapper.getTotalCount(cri);
+	}
+	
+	@Override
+	public List<BoardAttachVO> getAttachList(Long bno) {
+		log.info("get Attach list by bno" + bno);
+		return attachMapper.findByBno(bno);
 	}
 }

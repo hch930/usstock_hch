@@ -1,6 +1,7 @@
 package org.hch.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,8 @@ public class BoardVO {
 	private String ipAddress;
 	
 	private int replyCnt;
+	
+	private List<BoardAttachVO> attachList;
 	
 	public String getIpAddress() {
 		return ipAddress.substring(0, ipAddress.lastIndexOf(".")-2);

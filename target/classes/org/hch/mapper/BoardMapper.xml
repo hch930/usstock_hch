@@ -68,6 +68,24 @@ where rn > (#{pageNum}-1) * #{amount}
 		,SYS_CONTEXT ('USERENV', 'IP_ADDRESS'))
 </insert>
 
+<insert id = "insertSelectKey">
+	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+		select seq_board.nextval from dual
+	</selectKey>
+	insert into tbl_board(
+		bno
+		,title 
+		,content
+		,writer 
+		,ipaddress)
+	values(
+		#{bno}
+		,#{title}
+		,#{content}
+		,#{writer}
+		,SYS_CONTEXT ('USERENV', 'IP_ADDRESS'))
+</insert>
+
 <select id="read" resultType="org.hch.domain.BoardVO">
 	select * from tbl_board where bno = #{bno}
 </select>
