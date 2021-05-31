@@ -24,14 +24,14 @@
 		</bean>
 		
 		<!-- HikariCP configuration -->
-		<bean id="dataSoruce" class="com.zaxxer.hikari.HikariDataSource"
+		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 			destroy-method="close">
 			<constructor-arg ref="hikariConfig"/>
 		</bean>
 		
 		<bean id="sqlSesionFactory"
 			class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name="dataSource" ref="dataSoruce"></property>
+			<property name="dataSource" ref="dataSource"></property>
 			</bean>
 			
 		<mybatis-spring:scan base-package="org.hch.mapper"/>
