@@ -13,6 +13,7 @@ import org.hch.service.BoardService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,21 +53,24 @@ public class BoardController {
 		model.addAttribute("pageInfo", new PageDTO(cri, total));
 	}
 	
+	@GetMapping("/insert")
+	@PreAuthorize("isAuthenticated()")
+	public void insert() {
+		
+	}
+	
 	@PostMapping("/insert")
+	@PreAuthorize("isAuthenticated()")
 	public String insert(BoardVO board, RedirectAttributes rttr) {
-//		log.info("==============================");
+		log.info("==============================");
 		log.info("insert: " + board);
-//		if(board.getAttachList() != null) {
-//			board.getAttachList().forEach(attach -> log.info(attach));
-//		}
-//		log.info("==============================");
+		if(board.getAttachList() != null) {
+			board.getAttachList().forEach(attach -> log.info(attach));
+		}
+		log.info("==============================");
 		service.insert(board);
 		rttr.addFlashAttribute("result", board.getBno());
 		return "redirect:/board/list";
-	}
-	
-	@GetMapping("/insert")
-	public void insert() {
 	}
 	
 	@GetMapping({"/get","/modify"})
@@ -75,6 +79,7 @@ public class BoardController {
 		model.addAttribute("board", service.get(bno));
 	}
 	
+	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("modify: " + board);
@@ -108,8 +113,9 @@ public class BoardController {
 		});
 	}
 	
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
-	public String remove(Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String remove(Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, String writer) {
 		log.info("remove: " + bno);
 		
 		List<BoardAttachVO> attachList = service.getAttachList(bno);

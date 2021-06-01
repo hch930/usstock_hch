@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@ include file="../includes/header.jsp"%>
 
@@ -70,6 +71,7 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<form role="form" action="/board/modify" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div class="form-group">
 						<label>제목</label> <input class="form-control" name="bno"
 							value='<c:out value="${board.bno}"/>' readonly="readonly">
@@ -96,8 +98,12 @@
 					<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
 					<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'/>
 					<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'/>
-					
-					<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
+					<sec:authentication property="principal" var="pinfo"/>
+					<sec:authorize access="isAuthenticated()">
+						<c:if test="${pinfo.username eq board.writer}">
+							<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
+						</c:if>
+					</sec:authorize>
 					<button type="submit" data-oper='list' class="btn btn-info">리스트</button>
 				</form>
 			</div>
@@ -266,6 +272,9 @@ function showUploadResult(uploadResultArr){
 	uploadUL.append(str);
 }
 
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+
 $("input[type='file']").change(function(e){
 	var formData = new FormData();
 	var inputFile = $("input[name='uploadFile']");
@@ -282,6 +291,9 @@ $("input[type='file']").change(function(e){
 		url: '/uploadAjaxAction',
 		processData: false,
 		contentType: false,
+		beforeSend: function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		},
 		data: formData,
 		type: 'POST',
 		dataType: 'json',
