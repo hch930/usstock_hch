@@ -132,6 +132,6 @@ public class BoardController {
 	@ResponseBody
 	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno){
 		log.info("getAttachList " + + bno);
-		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK); 
 	}
 }
