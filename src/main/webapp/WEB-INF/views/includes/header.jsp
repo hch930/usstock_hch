@@ -9,7 +9,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Bootstrap Admin Theme</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<title>게시판</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
@@ -57,7 +59,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+				<a class="navbar-brand" href="list.html">게시판</a>
 			</div>
 			<!-- /.navbar-header -->
 

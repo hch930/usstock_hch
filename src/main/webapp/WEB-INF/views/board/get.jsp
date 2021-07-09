@@ -6,67 +6,11 @@
 	prefix="sec"%>
 
 <%@ include file="../includes/header.jsp"%>
+<link type="text/css" rel="stylesheet" href="/resources/css/boardStyle.css" />
 
 <div class='bigPictureWrapper'>
 	<div class='bigPicture'></div>
 </div>
-
-<style>
-form {
-	display: inline
-}
-
-.uploadResult {
-	width: 100%;
-	background-color: gray;
-}
-
-.uploadResult ul {
-	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.uploadResult ul li {
-	list-style: none;
-	padding: 10px;
-	align-content: center;
-	text-align: center;
-}
-
-.uploadResult ul li img {
-	width: 100px;
-}
-
-.uploadResult ul li span {
-	color: white;
-}
-
-.bigPictureWrapper {
-	position: absolute;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	top: 0%;
-	width: 100%;
-	height: 100%;
-	background-color: gray;
-	z-index: 100;
-	background: rgba(255, 255, 255, 0, 5);
-}
-
-.bigPicture {
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.bigPicture img {
-	width: 600px;
-}
-</style>
 
 <div class="row">
 	<div class="col-lg-12">
@@ -85,7 +29,7 @@ form {
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token }" />
 					<div class="form-group">
-						<label>제목</label> <input class="form-control" name="bno"
+						<label>번호</label> <input class="form-control" name="bno"
 							value='<c:out value="${board.bno}"/>' readonly="readonly">
 					</div>
 					<div class="form-group">
@@ -94,8 +38,7 @@ form {
 					</div>
 					<div class="form-group">
 						<label>내용</label>
-						<textarea class="form-control" rows="3" name="content"
-							readonly="readonly"><c:out value="${board.content}" /></textarea>
+						<pre><c:out value="${board.content}" escapeXml="false"/></pre>
 					</div>
 					<div class="form-group">
 						<label>작성자</label> <input class="form-control" name="writer"
@@ -166,10 +109,10 @@ form {
 					<li class="left clearfix" data-rno='12'>
 						<div>
 							<div class="header">
-								<strong class="primary-font">user00</strong> <small
-									class="pull-right text-muted">2021-05-24 10:32</small>
+								<strong class="primary-font">user</strong> <small
+									class="pull-right text-muted">2021-07-09 10:32</small>
 							</div>
-							<p>Good job!</p>
+							<p>안녕하세요</p>
 						</div>
 					</li>
 				</ul>
@@ -180,13 +123,11 @@ form {
 </div>
 
 <form id="operForm" action="/board/modify" method="get">
-	<input type="hidden" id="bno" name="bno"
-		value='<c:out value="${board.bno}"/>'> <input type="hidden"
-		name="pageNum" value='<c:out value="${cri.pageNum}"/>'> <input
-		type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+	<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'> 
+	<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
 	<input type='hidden' name='type' value='<c:out value="${cri.type}"/>' />
-	<input type='hidden' name='keyword'
-		value='<c:out value="${cri.keyword}"/>' />
+	<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>' />
+	<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno}"/>'> 
 </form>
 
 <!-- Modal -->

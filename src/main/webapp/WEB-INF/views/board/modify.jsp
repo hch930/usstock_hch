@@ -5,57 +5,8 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@ include file="../includes/header.jsp"%>
-
-<div class='bigPictureWrapper'>
-	<div class='bigPicture'>
-	</div>
-</div>
-
-<style>
-  .uploadResult{
-	width:100%;
-	background-color: gray;
- }
- .uploadResult ul{
- 	display:flex;
- 	flex-flow: row;
- 	justify-content: center;
- 	align-items: center;
- }
- .uploadResult ul li{
- 	list-style: none;
- 	padding: 10px;
- 	align-content: center;
- 	text-align: center;
- }
- .uploadResult ul li img{
- 	width: 100px;
- }
- .uploadResult ul li span{
- 	color:white;
- }
-.bigPictureWrapper{
-	position: absolute;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	top: 0%;
-	width: 100%;
-	height: 100%;
-	background-color: gray;
-	z-index: 100;
-	background:rgba(255,255,255,0,5);
-}
-.bigPicture{
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.bigPicture img{
-	width:600px;
-}
-</style>
+<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<link type="text/css" rel="stylesheet" href="/resources/css/boardStyle.css" />
 
 <div class="row">
 	<div class="col-lg-12">
@@ -70,7 +21,7 @@
 			<div class="panel-heading">글수정</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
-				<form role="form" action="/board/modify" method="post">
+				<form role="form" id="modifyForm" action="/board/modify" method="post">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div class="form-group">
 						<label>제목</label> <input class="form-control" name="bno"
@@ -82,8 +33,9 @@
 					</div>
 					<div class="form-group">
 						<label>내용</label>
-						<textarea class="form-control" rows="3" name="content"><c:out
-								value="${board.content}" /></textarea>
+						<textarea class="form-control" id="content" name="content"><c:out
+ 								value="${board.content}" /></textarea>
+<%-- 						<pre id="content"><c:out value="${board.content}" escapeXml="false"/></pre> --%>
 					</div>
 					<div class="form-group">
 						<label>작성자</label> <input class="form-control" name="writer"
@@ -98,13 +50,14 @@
 					<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
 					<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'/>
 					<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'/>
+					<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno}"/>'> 
 					<sec:authentication property="principal" var="pinfo"/>
 					<sec:authorize access="isAuthenticated()">
 						<c:if test="${pinfo.username eq board.writer}">
 							<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
 						</c:if>
 					</sec:authorize>
-					<button type="submit" data-oper='list' class="btn btn-info">리스트</button>
+					<button id="list" type="submit" data-oper='list' class="btn btn-info">리스트</button>
 				</form>
 			</div>
 		</div>
@@ -136,7 +89,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 var formObj = $("form");
-$('button').on("click", function(e){
+$('#list').on("click", function(e){
 	e.preventDefault();
 	var operation = $(this).data("oper");
 	console.log(operation);
@@ -308,3 +261,4 @@ $("input[type='file']").change(function(e){
 </script>
 
 <%@include file="../includes/footer.jsp"%>
+<script src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script>

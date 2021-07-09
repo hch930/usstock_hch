@@ -23,7 +23,7 @@ create table tbl_reply(
 	reply varchar2(1000) not null,
 	replyer varchar2(50) not null,
 	replyDate date default sysdate,
-	updaeDate date default sysdate,
+	updateDate date default sysdate,
 	ipAddress varchar2(20) not null
 );
 
@@ -56,7 +56,8 @@ where tbl_reply.bno = tbl_board.bno);
 ---------------------------------------------------- 삭제  ----------------------------------------------------------
 
 drop table tbl_board;
+drop table tbl_reply;
+drop table tbl_attach;
 
 drop sequence seq_board;
-
-
+drop sequence seq_reply;

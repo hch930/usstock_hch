@@ -17,8 +17,8 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">게시판 
-				<button id='regBtn' type="button" class="btn btn-xs pull-right">
-				글쓰기</button></div>
+				<button id='regBtn' type="button" style="font-size: 10pt" class="btn btn-xs pull-right">
+				<strong>글쓰기</strong></button></div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">	
 					<table width="100%"
@@ -30,7 +30,6 @@
 								<th>제목</th>
 								<th>작성자</th>
 								<th>작성일</th>
-								<th>수정일</th>
 								<th>ip주소</th>
 							</tr>
 						</thead>
@@ -44,8 +43,6 @@
 									<td><c:out value="${board.writer}" /></td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${board.regdate}" /></td>
-									<td><fmt:formatDate pattern="yyyy-MM-dd"
-											value="${board.updateDate}" /></td>
 									<td><c:out value="${board.ipAddress}" /></td>
 								</tr>
 							</c:forEach>

@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import oracle.security.o3logon.a;
 
 @Log4j
 @Service
