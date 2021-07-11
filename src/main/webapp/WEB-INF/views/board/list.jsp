@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="../includes/header.jsp"%>
+<link type="text/css" rel="stylesheet" href="/resources/css/list.css" />
 <!-- Begin Page Content -->
 
 	<div class="row">
@@ -17,8 +18,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">게시판 
-				<button id='regBtn' type="button" style="font-size: 10pt" class="btn btn-xs pull-right">
-				<strong>글쓰기</strong></button></div>
+				<button style="border:0;" id='regBtn' class="writingImgButton pull-right"></button></div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">	
 					<table width="100%"
@@ -31,40 +31,50 @@
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>ip주소</th>
+								<th>조회수</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${list}" var="board">
+							<c:set var="today" value="<%=new java.util.Date()%>"/>
+							<fmt:formatDate var="now" type="date" value="${today}" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate var="regDate" pattern="yyyy-MM-dd" value="${board.regdate}" />
 								<tr>
 									<td><c:out value="${board.bno}" /></td>
 									<td><a class="move" href='<c:out value="${board.bno}"/>'>
 											<c:out value="${board.title}" /> <b>[<c:out value="${board.replyCnt}"/>]</b>
 									</a></td>
 									<td><c:out value="${board.writer}" /></td>
-									<td><fmt:formatDate pattern="yyyy-MM-dd"
-											value="${board.regdate}" /></td>
+									<td>
+									<c:choose> 
+										<c:when test="${now gt regDate}">
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" />
+										</c:when>
+										<c:otherwise>
+											<fmt:formatDate pattern="HH:mm:ss" value="${board.regdate}" />
+										</c:otherwise>
+									</c:choose>
+									</td>
 									<td><c:out value="${board.ipAddress}" /></td>
+									<td><c:out value="${board.hit}"/></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 					<div class="row">
 						<div class="col-lg-12">
-						
+						<button id='regBtn' type="button" class="writingButton pull-right">글쓰기</button>
 						<form id="searchForm" action="/board/list" method="get">
 							<select name="type">
-								<option value=""<c:out value="${pageInfo.cri.type == null?'selected':''}"/>>선택</option>
+								<option value="TC"<c:out value="${pageInfo.cri.type eq 'TC'?'selected':''}"/>>제목 + 내용</option>
 								<option value="T"<c:out value="${pageInfo.cri.type eq 'T'?'selected':''}"/>>제목</option>
 								<option value="C"<c:out value="${pageInfo.cri.type eq 'C'?'selected':''}"/>>내용</option>
 								<option value="W"<c:out value="${pageInfo.cri.type eq 'W'?'selected':''}"/>>작성자</option>
-								<option value="TC"<c:out value="${pageInfo.cri.type eq 'TC'?'selected':''}"/>>제목 or 내용</option>
-								<option value="TW"<c:out value="${pageInfo.cri.type eq 'TW'?'selected':''}"/>>제목 or 작성자</option>
-								<option value="TWC"<c:out value="${pageInfo.cri.type eq 'TWC'?'selected':''}"/>>제목 or 내용 or 작성자</option>
 							</select>
-							<input type='text' name='keyword' value='<c:out value="${pageInfo.cri.keyword}"/>'/>
+							<input type='text' id="tKeyword" name='keyword' value='<c:out value="${pageInfo.cri.keyword}"/>'/>
 							<input type="hidden" name="pageNum" value='<c:out value="${pageInfo.cri.pageNum}"/>'/>
 							<input type="hidden" name="amount" value='<c:out value="${pageInfo.cri.amount}"/>'/>
-							<button class="btn btn-default">검색</button>
+							<button class="selectButton"></button>
 						</form>
 						</div>
 					</div>
@@ -131,11 +141,6 @@
 		var searchForm = $("#searchForm");
 		
 		$("#searchForm button").on("click", function(e){
-			if(!searchForm.find("option:selected").val()){
-				alert("검색종류를 선택하세요");
-				return false;
-			}
-			
 			if(!searchForm.find("input[name='keyword']").val()){
 				alert("검색내용을 입력하세요");
 				return false;

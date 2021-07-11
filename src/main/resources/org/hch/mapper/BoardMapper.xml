@@ -6,7 +6,7 @@
 
 <select id="getList" resultType="org.hch.domain.BoardVO">
 <![CDATA[
-select * from tbl_board where bno > 0
+select * from tbl_board where bno > 0 and deleteYn = 'N'
 ]]>
 </select>
 
@@ -33,10 +33,10 @@ select * from tbl_board where bno > 0
 <select id="getListWithPaging" resultType="org.hch.domain.BoardVO">
 <![CDATA[
 select
-  bno, title, content, writer, regdate, updatedate, ipaddress, replycnt
+  bno, title, content, writer, regdate, updatedate, ipaddress, replycnt, hit
 from
 (select /*+INDEX_DESC(tbl_board pk_board) */
-rownum rn, bno, title, content, writer, regdate, updatedate, ipaddress, replycnt 
+rownum rn, bno, title, content, writer, regdate, updatedate, ipaddress, replycnt, hit
 from tbl_board
 where
 ]]>
@@ -50,7 +50,7 @@ where rn > (#{pageNum}-1) * #{amount}
 <select id="getTotalCount" resultType="int">
 	select count(*) from tbl_board where 
 	<include refid="criteria"></include>
-	bno > 0
+	bno > 0 and deleteYn = 'N'
 </select>
 
 <insert id="insert">
@@ -87,7 +87,7 @@ where rn > (#{pageNum}-1) * #{amount}
 </insert>
 
 <select id="read" resultType="org.hch.domain.BoardVO">
-	select * from tbl_board where bno = #{bno}
+	select * from tbl_board where bno = #{bno} and deleteYn = 'N'
 </select>
 
 <update id="update">
@@ -96,16 +96,23 @@ where rn > (#{pageNum}-1) * #{amount}
 	,content = #{content}
 	,writer = #{writer}
 	,updateDate = sysdate
-	where bno = #{bno}
+	where bno = #{bno} and deleteYn = 'N'
 </update>
 
 <delete id="delete">
-	delete from tbl_board
-	where bno = #{bno} 
+	update tbl_board
+	set deleteYn = 'Y'
+	where bno = #{bno}
 </delete>
 
 <update id="updateReplyCnt">
 	update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
 </update>
+
+<update id="boardHit" parameterType="Long">
+    	UPDATE tbl_board SET
+    	HIT = HIT+1
+    	WHERE BNO = #{bno}
+    </update>
 
 </mapper>

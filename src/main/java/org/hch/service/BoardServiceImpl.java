@@ -8,6 +8,7 @@ import org.hch.domain.Criteria;
 import org.hch.mapper.BoardAttachMapper;
 import org.hch.mapper.BoardMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
@@ -48,9 +49,11 @@ public class BoardServiceImpl implements BoardService{
 		});
 	}
 	
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public BoardVO get(Long bno) {
 		log.info("get");
+		mapper.boardHit(bno);
 		return mapper.read(bno);
 	}
 	

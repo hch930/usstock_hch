@@ -41,6 +41,8 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
+
+		
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
 		//model.addAttribute("pageInfo", new PageDTO(cri, 123));

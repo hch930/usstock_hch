@@ -1,0 +1,67 @@
+.writingButton {
+	box-shadow:inset 0px 0px 15px 3px #23395e;
+	background:linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+	background-color:#2e466e;
+	border-radius:17px;
+	border:1px solid #1f2f47;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:10px;
+	padding:6px 13px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
+}
+.writingButton:hover {
+	background:linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+	background-color:#415989;
+}
+.writingButton:active {
+	position:relative;
+	top:1px;
+}
+
+.writingImgButton{
+	background-image: url('/resources/img/pencil.png'); 
+    background-color: transparent; 
+    background-repeat: no-repeat;  
+    border: none;            
+    height: 25px;           
+    padding-left: 25px;     
+    vertical-align: middle; 
+}
+
+select {
+margin-left: 37em;
+width: 80px;
+height: 30px;
+padding: .8em .5em;
+border: 1px solid #999;
+font-family: inherit;
+font-size: 10px;
+background: url('/resources/img/arrow.png') no-repeat 95% 50%;
+border-radius: 0px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+#tKeyword{
+	width: 250px;
+	height:30px;
+}
+
+.selectButton{
+	background-image: url('/resources/img/select.png'); 
+    background-color: transparent; 
+    background-repeat: no-repeat;  
+    border: none;            
+    height: 25px;           
+    padding-left: 25px;     
+    vertical-align: middle; 
+}

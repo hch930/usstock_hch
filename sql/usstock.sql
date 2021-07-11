@@ -53,6 +53,29 @@ alter table tbl_board add(replycnt number default 0);
 
 update tbl_board set replycnt = (select count(rno) from tbl_reply
 where tbl_reply.bno = tbl_board.bno);
+
+---------------------------------------------------- 맴버 테이블 및 권한 ----------------------------
+create table tbl_member(
+      userid varchar2(50) not null primary key,
+      userpw varchar2(100) not null,
+      username varchar2(100) not null,
+      regdate date default sysdate, 
+      updatedate date default sysdate,
+      enabled char(1) default '1');
+ 
+ 
+create table tbl_member_auth (
+     userid varchar2(50) not null,
+     auth varchar2(50) not null,
+     constraint fk_member_auth foreign key(userid) references tbl_member(userid)
+);
+-----------------------------------board 테이블에 조회수 컬럼 추가 ------------------------------------
+alter table tbl_board add(Hit number default 0);
+commit;
+
+-----------------------------------board 테이블에 delete 컬럼 추가 -------------------------------------------
+alter table tbl_board add(deleteYn char(1) default 'N');
+commit;
 ---------------------------------------------------- 삭제  ----------------------------------------------------------
 
 drop table tbl_board;

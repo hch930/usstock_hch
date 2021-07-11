@@ -34,8 +34,7 @@
 						<label>작성자</label> <input class="form-control" name="writer"
 						value='<sec:authentication property="principal.username"/>' readonly="readonly">
 					</div>
-					<button type="button" class="btn btn-default"
-						onclick="history.back()">취소</button>
+					<button type="button" class="btn btn-default" onclick="location.href='list'">취소</button>
 					<button type="submit" class="btn btn-default">작성</button>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
 				</form>
@@ -67,7 +66,6 @@
 </div>
 
 <script>
-
 $(document).ready(function(e){
 	var formObj = $("form[role='form']");
 	$("button[type='submit']").on("click", function(e){

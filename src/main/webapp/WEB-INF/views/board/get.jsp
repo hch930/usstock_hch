@@ -6,7 +6,6 @@
 	prefix="sec"%>
 
 <%@ include file="../includes/header.jsp"%>
-<link type="text/css" rel="stylesheet" href="/resources/css/boardStyle.css" />
 
 <div class='bigPictureWrapper'>
 	<div class='bigPicture'></div>
@@ -25,7 +24,7 @@
 			<div class="panel-heading">게시판</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
-				<form role="form" action="/board/remove" method="post">
+				<form style="display: inline" role="form" action="/board/remove" method="post">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token }" />
 					<div class="form-group">
@@ -48,6 +47,10 @@
 						<label>ip</label> <input class="form-control" name="ipAddress"
 							value='<c:out value="${board.ipAddress}"/>' readonly="readonly">
 					</div>
+					<div class="form-group">
+						<label>조회수</label> <input class="form-control" name="hit"
+							value='<c:out value="${board.hit}"/>' readonly="readonly">
+					</div>
 
 					<input type="hidden" name="pageNum"
 						value='<c:out value="${cri.pageNum}"/>'> <input
@@ -69,6 +72,7 @@
 						<button data-oper='modify' class="btn btn-default">수정</button>
 					</c:if>
 				</sec:authorize>
+				<button data-oper='list' class="btn btn-default">리스트</button>
 			</div>
 		</div>
 
@@ -394,33 +398,7 @@ replyService.getList({bno:bnoValue, page:1}, function(list){
 		console.log(list[i]);
 	}
 });
-/*
-replyService.add(
-		{reply:"JS TEST", replyer:"tester", bno:bnoValue}
-		,
-		function(result){
-			alert("RESULT: " + result);
-		}
-);
 
-replyService.remove(40, function(count){
-	console.log(count);
-	
-	if(count == "success"){
-		alert("REMOVED");
-	}
-},function(err){
-	alert("ERROR....");
-});
-
-replyService.update({
-	rno : 22,
-	bno : bnoValue,
-	reply : "modified Reply..."
-}, function(result){
-	alert("수정 완료...");
-});
-*/
 replyService.get(20, function(data){
 	console.log(data);
 });
@@ -438,6 +416,12 @@ $(document).ready(function(e){
 	$("button[data-oper='remove']").on("click", function(e){
 		
 		formObj.submit();
+	});
+	
+	$("button[data-oper='list']").on("click", function(e){
+		operForm.find("#bno").remove();
+		operForm.attr("action", "/board/list")
+		operForm.submit();
 	});
 	
 	(function(){
@@ -506,6 +490,7 @@ $(".uploadResult").on("click","li", function(e){
       $('.bigPictureWrapper').hide();
     }, 1000);
   });
+  
 </script>
 
 <%@include file="../includes/footer.jsp"%>
