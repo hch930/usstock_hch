@@ -7,12 +7,10 @@ import org.hch.domain.ReplyPageDTO;
 import org.hch.domain.ReplyVO;
 import org.hch.mapper.BoardMapper;
 import org.hch.mapper.ReplyMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @AllArgsConstructor
@@ -40,6 +38,7 @@ public class ReplyServiceImpl implements ReplyService{
 		return mapper.read(rno);
 	}
 	
+	@Transactional
 	@Override
 	public int modify(ReplyVO vo) {
 		log.info("modify...." + vo);

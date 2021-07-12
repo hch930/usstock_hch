@@ -62,13 +62,20 @@ create table tbl_member(
       regdate date default sysdate, 
       updatedate date default sysdate,
       enabled char(1) default '1');
- 
- 
+      
 create table tbl_member_auth (
      userid varchar2(50) not null,
      auth varchar2(50) not null,
      constraint fk_member_auth foreign key(userid) references tbl_member(userid)
 );
+--------------------------------------------------자동 로그인 ---------------------------------------------------------
+create table persistent_logins (
+  username varchar2(64) not null,
+  series varchar2(64) primary key, 
+  token varchar2(64) not null,
+  last_used timestamp not null
+);
+
 -----------------------------------board 테이블에 조회수 컬럼 추가 ------------------------------------
 alter table tbl_board add(Hit number default 0);
 commit;

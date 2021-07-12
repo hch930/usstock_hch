@@ -33,19 +33,12 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	private BoardService service;
 	
-//	@GetMapping("/list")
-//	public void list(Model model) {
-//		log.info("list");
-//		model.addAttribute("list", service.getList());
-//	}
-	
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 
 		
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
-		//model.addAttribute("pageInfo", new PageDTO(cri, 123));
 		
 		int total =service.getTotal(cri);
 		
@@ -62,12 +55,10 @@ public class BoardController {
 	@PostMapping("/insert")
 	@PreAuthorize("isAuthenticated()")
 	public String insert(BoardVO board, RedirectAttributes rttr) {
-		log.info("==============================");
 		log.info("insert: " + board);
 		if(board.getAttachList() != null) {
 			board.getAttachList().forEach(attach -> log.info(attach));
 		}
-		log.info("==============================");
 		service.insert(board);
 		rttr.addFlashAttribute("result", board.getBno());
 		return "redirect:/board/list";

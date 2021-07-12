@@ -6,6 +6,7 @@
 	prefix="sec"%>
 
 <%@ include file="../includes/header.jsp"%>
+<link type="text/css" rel="stylesheet" href="/resources/css/boardStyle.css" />
 
 <div class='bigPictureWrapper'>
 	<div class='bigPicture'></div>

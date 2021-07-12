@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -37,25 +37,28 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">로그인</h3>
+                    <div class="panel-heading" style="background-color: #003366;">
+                        <h3 class="panel-title" style="color:white;">로그인</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form" method="post" action="/login">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="userid" name="username" type="text" autofocus>
+                                    <input class="form-control" placeholder="아이디" name="username" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="비밀번호" name="password" type="password" value="">
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="remember-me" type="checkbox">자동 로그인
+                                        <input name="remember-me" type="checkbox">로그인 상태 유지
                                     </label>
+                                    <a class="pull-right" href="/register">
+                                		회원가입
+                                	</a>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">로그인</a>
+                                <a href="/board/list" style="background-color: #003366;" class="btn btn-lg btn-success btn-block">로그인</a>
                             </fieldset>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>
@@ -87,7 +90,7 @@
     <c:if test="${param.logout != null}">
     	<script>
     	$(document).ready(function(){
-    		alert("로그아웃하셨습니다.");
+    		alert("로그아웃되었습니다.");
     	});
     	</script>
     </c:if>

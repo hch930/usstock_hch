@@ -23,4 +23,20 @@
 	FROM tbl_member mem LEFT OUTER JOIN tbl_member_auth auth on mem.userid = auth.userid
 	WHERE mem.userid = #{userid}
 	</select>
+	
+	<insert id="insertUser">
+		insert into tbl_member(userid, userpw, userName) 
+		values (#{userid},#{userpw},#{userName})
+	</insert>	
+	
+	<insert id="insertUserAuth">
+		insert into tbl_member_auth(userid, auth) 
+		values (#{userid},'ROLE_USER')
+	</insert>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM tbl_member
+		WHERE userid = #{userid}
+	</select>
 </mapper>

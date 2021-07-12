@@ -8,7 +8,6 @@ import org.hch.domain.Criteria;
 import org.hch.mapper.BoardAttachMapper;
 import org.hch.mapper.BoardMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
@@ -21,12 +20,6 @@ public class BoardServiceImpl implements BoardService{
 	private BoardMapper mapper;
 	
 	private BoardAttachMapper attachMapper;
-	
-//	@Override
-//	public List<BoardVO> getList() {
-//		log.info("getList");
-//		return mapper.getList();
-//	}
 	
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
@@ -49,7 +42,6 @@ public class BoardServiceImpl implements BoardService{
 		});
 	}
 	
-	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public BoardVO get(Long bno) {
 		log.info("get");
@@ -57,12 +49,14 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.read(bno);
 	}
 	
+	@Transactional
 	@Override
 	public boolean remove(Long bno) {
 		log.info("delete");
 		return mapper.delete(bno) == 1;
 	}
 	
+	@Transactional
 	@Override
 	public boolean modify(BoardVO board) {
 		log.info("modify");

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -42,15 +42,15 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">로그아웃</h3>
+                    <div class="panel-heading" style="background-color: #003366;">
+                        <h3 class="panel-title" style="color:white;">로그아웃</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form" method="post" action="/customLogout">
                             <fieldset>
                              
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block">로그아웃</a>
+                                <a href="index.html" style="background-color: #003366;" class="btn btn-lg btn-success btn-block">로그아웃</a>
                             </fieldset>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>

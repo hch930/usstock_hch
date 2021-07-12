@@ -18,7 +18,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">게시판 
-				<button style="border:0;" id='regBtn' class="writingImgButton pull-right"></button></div>
+				<button name='regBtn' class="writingImgButton pull-right"></button></div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">	
 					<table width="100%"
@@ -63,7 +63,7 @@
 					</table>
 					<div class="row">
 						<div class="col-lg-12">
-						<button id='regBtn' type="button" class="writingButton pull-right">글쓰기</button>
+						<button name='regBtn' class="writingButton pull-right">글쓰기</button>
 						<form id="searchForm" action="/board/list" method="get">
 							<select name="type">
 								<option value="TC"<c:out value="${pageInfo.cri.type eq 'TC'?'selected':''}"/>>제목 + 내용</option>
@@ -118,7 +118,7 @@
 		
 		history.replaceState({},null,null);
 		
-		$("#regBtn").on("click", function() {
+		$("button[name=regBtn]").on("click", function() {
 			self.location = "/board/insert";
 		});
 		

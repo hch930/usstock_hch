@@ -172,7 +172,7 @@ $(".uploadResult").on("click", "button", function(e){
 	}
 });
 
-var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+var regex = new RegExp("(.*?)\.(exe|sh|asp|php|jsp|cgi|aspx|com|html|htm|cab|php3|pl|java|class|js|css)$");
 var maxSize = 5242880;
 
 function checkExtension(fileName, fileSize){

@@ -10,7 +10,7 @@
 <meta name="author" content="">
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <title>게시판</title>
 
 <!-- Bootstrap Core CSS -->
@@ -54,7 +54,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="list.html">게시판</a>
+				<a class="navbar-brand" href="/board/list">게시판</a>
 			</div>
 			<!-- /.navbar-header -->
 
@@ -223,13 +223,18 @@
 						<i class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
-								Profile</a></li>
-						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						<li><a href="/register"><i class="fa fa-user fa-fw"></i> 회원가입</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> 설정</a>
 						</li>
 						<li class="divider"></li>
+						<sec:authorize access="isAuthenticated()">
 						<li><a href="/customLogout"><i class="fa fa-sign-out fa-fw"></i>
-								Logout</a></li>
+								로그아웃</a></li>
+						</sec:authorize>
+						<sec:authorize access="isAnonymous()">
+						<li><a href="/customLogin"><i class="fa fa-sign-out fa-fw"></i>
+								로그인</a></li>
+						</sec:authorize>
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
 			</ul>
@@ -248,8 +253,8 @@
 								</span>
 							</div> <!-- /input-group -->
 						</li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
-								Dashboard</a></li>
+						<li><a href="/board/list"><i class="fa fa-dashboard fa-fw"></i>
+								게시판</a></li>
 						<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
 								Charts<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
