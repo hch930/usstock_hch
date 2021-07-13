@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequiredArgsConstructor
+@RequestMapping("/login/*")
 public class MemberController {
 	private final MemberService service;
 
@@ -46,7 +48,7 @@ public class MemberController {
 	   }catch(Exception e) {
 		   log.info("Exception: " + e);
 	   }
-	   return "redirect:/customLogin";
+	   return "redirect:/login/customLogin";
 	 }
 	
 	@GetMapping("/accessError")

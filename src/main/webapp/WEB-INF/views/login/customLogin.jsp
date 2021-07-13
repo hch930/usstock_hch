@@ -53,7 +53,7 @@
                                     <label>
                                         <input name="remember-me" type="checkbox">로그인 상태 유지
                                     </label>
-                                    <a class="pull-right" href="/register">
+                                    <a class="pull-right" href="/login/register">
                                 		회원가입
                                 	</a>
                                 </div>

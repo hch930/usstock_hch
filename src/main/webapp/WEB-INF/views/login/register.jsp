@@ -14,10 +14,8 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			// 취소
-			$(".cencle").on("click", function(){
-				
-				location.href = "/login";
-						    
+			$(".cancle").on("click", function(){
+				location.href="javascript:history.back()";
 			})
 		
 			$("#submit").on("click", function(){
@@ -41,7 +39,7 @@
 	</script>
 	<body>
 		<section id="container">
-			<form action="/register" method="post">
+			<form action="/login/register" method="post">
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userId">아이디</label>
 					<input class="form-control" type="text" id="userid" name="userid" />
@@ -56,7 +54,7 @@
 				</div>
 				<div class="form-group has-feedback">
 					<button class="btn btn-success" type="submit" id="submit">회원가입</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
+					<button class="cancle btn btn-danger" type="button">취소</button>
 				</div>
 				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>

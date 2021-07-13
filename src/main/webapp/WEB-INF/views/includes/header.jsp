@@ -223,16 +223,16 @@
 						<i class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="/register"><i class="fa fa-user fa-fw"></i> 회원가입</a></li>
+						<li><a href="/login/register"><i class="fa fa-user fa-fw"></i> 회원가입</a></li>
 						<li><a href="#"><i class="fa fa-gear fa-fw"></i> 설정</a>
 						</li>
 						<li class="divider"></li>
 						<sec:authorize access="isAuthenticated()">
-						<li><a href="/customLogout"><i class="fa fa-sign-out fa-fw"></i>
+						<li><a href="/login/customLogout"><i class="fa fa-sign-out fa-fw"></i>
 								로그아웃</a></li>
 						</sec:authorize>
 						<sec:authorize access="isAnonymous()">
-						<li><a href="/customLogin"><i class="fa fa-sign-out fa-fw"></i>
+						<li><a href="/login/customLogin"><i class="fa fa-sign-out fa-fw"></i>
 								로그인</a></li>
 						</sec:authorize>
 					</ul> <!-- /.dropdown-user --></li>
