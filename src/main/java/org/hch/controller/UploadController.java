@@ -54,7 +54,9 @@ public class UploadController {
 		try {
 			String contentType = Files.probeContentType(file.toPath());
 			
-			return contentType.startsWith("image");
+			if(contentType != null || !"".equals(contentType)) {
+				return contentType.startsWith("image");
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

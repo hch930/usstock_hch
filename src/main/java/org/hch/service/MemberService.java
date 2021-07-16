@@ -8,5 +8,6 @@ public interface MemberService {
 	
 	public void registerAuth(AuthVO vo);
 	
-	public int idChk(MemberVO vo);
+	/* 아이디 중복 검사 */
+	public int idCheck(String userid) throws Exception;
 }

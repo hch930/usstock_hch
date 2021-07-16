@@ -22,9 +22,9 @@ public class MemberServiceImpl implements MemberService{
 		mapper.insertUserAuth(vo);
 	}
 	
+	/* 아이디 중복 검사 */
 	@Override
-	public int idChk(MemberVO vo) {
-		int result = mapper.idChk(vo);
-		return result;
+	public int idCheck(String userid) throws Exception {	
+		return mapper.idCheck(userid);
 	}
 }

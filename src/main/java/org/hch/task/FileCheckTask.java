@@ -58,8 +58,12 @@ public class FileCheckTask {
 		log.warn("----------------------------------");
 		
 		for(File file: removeFiles) {
-			log.warn(file.getAbsolutePath());
-			file.delete();
+			if(file != null) {
+				log.warn(file.getAbsolutePath());
+				file.delete();
+			}else {
+				
+			}
 		}
 	}
 }

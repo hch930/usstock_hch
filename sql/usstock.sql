@@ -7,10 +7,10 @@ create table tbl_board(
 	writer varchar2(50) not null,
 	regdate date default sysdate,
 	updatedate date default sysdate,
-	ipaddress varchar2(20) not null
+	ipaddress varchar2(20) not null,
+	Hit number default 0 not null,
+	deleteYn char(1) default 'N' not null
 );
-
-create sequence seq_reply;
 
 alter table tbl_board add constraint pk_board
 primary key(bno);
@@ -26,6 +26,8 @@ create table tbl_reply(
 	updateDate date default sysdate,
 	ipAddress varchar2(20) not null
 );
+
+create sequence seq_reply;
 
 alter table tbl_reply add constraint pk_reply primary key(rno);
 
