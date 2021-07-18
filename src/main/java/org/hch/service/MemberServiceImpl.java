@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	/* 아이디 중복 검사 */
 	@Override
-	public int idCheck(String userid) throws Exception {	
+	public int idCheck(String userid){	
 		return mapper.idCheck(userid);
 	}
 }

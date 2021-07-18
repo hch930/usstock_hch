@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 	private final MemberService service;
 
-	private final BCryptPasswordEncoder pwencoder;
+	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	// 회원가입 GET
 	@GetMapping("/register")
@@ -32,8 +32,9 @@ public class MemberController {
 	// 회원가입 POST
 	@PostMapping("/register")
 	public String register(MemberVO vo) {
-		vo.setUserpw(pwencoder.encode(vo.getUserpw()));
+		vo.setUserpw(bcryptPasswordEncoder.encode(vo.getUserpw()));
 		service.register(vo);
+
 		AuthVO auth = new AuthVO();
 		auth.setUserid(vo.getUserid());
 		auth.setAuth(auth.getAuth());
@@ -43,20 +44,16 @@ public class MemberController {
 
 	// 아이디 중복 검사
 	@PostMapping("/userIdChk")
+	@ResponseBody
 	public String userIdChkPOST(String userid) throws Exception {
-
 		log.info("userIdChk() 진입");
-
 		int result = service.idCheck(userid);
-
 		log.info("결과값 = " + result);
 
 		if (result != 0) {
-
 			return "fail"; // 중복 아이디가 존재
 
 		} else {
-
 			return "success"; // 중복 아이디 x
 
 		}
