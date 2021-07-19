@@ -27,7 +27,7 @@
 						<label for="userid">아이디</label>
 					</h3>
 					<span class="box int_id"> 
-						<input type="text" id="userid" class="int" maxlength="20">	
+						<input type="text" id="userid" name="userid" class="int" maxlength="20">	
 					</span>
 					<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
 					<span class="id_input_re_2">아이디가 이미 존재합니다.</span>	
@@ -39,7 +39,7 @@
 						<label for="userpw">비밀번호</label>
 					</h3>
 					<span class="box int_pass"> 
-						<input type="password" id="userpw" class="int" maxlength="20">
+						<input type="password" id="userpw" name="userpw" class="int" maxlength="20">
 						<img src="/resources/img/lock.png" id="pswd1_img1" class="pswdImg">
 					</span> 
 					<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
@@ -50,7 +50,7 @@
 						<label for="userRepw">비밀번호 확인</label>
 					</h3>
 					<span class="box int_pass_check"> 
-						<input type="password" id="userRepw" class="int" maxlength="20"> 
+						<input type="password" id="userRepw" name="userRepw" class="int" maxlength="20"> 
 						<img src="/resources/img/lock.png" id="pswd2_img1" class="pswdImg">
 					</span> 
 					<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
@@ -63,7 +63,7 @@
 						<label for="userName">이름</label>
 					</h3>
 					<span class="box int_name"> 
-						<input type="text" id="userName" class="int" maxlength="20">
+						<input type="text" id="userName" name="userName" class="int" maxlength="20">
 					</span> 
 					<span class="final_name_ck">이름을 입력해주세요.</span>
 				</div>

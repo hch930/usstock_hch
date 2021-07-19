@@ -32,13 +32,23 @@ public class MemberController {
 	// 회원가입 POST
 	@PostMapping("/register")
 	public String register(MemberVO vo) {
-		vo.setUserpw(bcryptPasswordEncoder.encode(vo.getUserpw()));
-		service.register(vo);
-
-		AuthVO auth = new AuthVO();
-		auth.setUserid(vo.getUserid());
-		auth.setAuth(auth.getAuth());
-		service.registerAuth(auth);
+		log.info("register");
+		int result = service.idCheck(vo.getUserid());
+		try {
+			if(result == 1) {
+				return "/login/register";
+			}else if(result == 0) {
+				vo.setUserpw(bcryptPasswordEncoder.encode(vo.getUserpw()));
+				service.register(vo);
+		
+				AuthVO auth = new AuthVO();
+				auth.setUserid(vo.getUserid());
+				auth.setAuth(auth.getAuth());
+				service.registerAuth(auth);
+			}
+		}catch(Exception e) {
+				throw new RuntimeException();
+		}
 		return "redirect:/login/customLogin";
 	}
 
@@ -55,11 +65,10 @@ public class MemberController {
 
 		} else {
 			return "success"; // 중복 아이디 x
-
 		}
-
 	}
 
+	//엑세스 에러
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
 		log.info("access Denied: " + auth);
@@ -67,6 +76,7 @@ public class MemberController {
 		model.addAttribute("msg", "Access denied");
 	}
 
+	//로그인
 	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error: " + error);
@@ -80,6 +90,7 @@ public class MemberController {
 		}
 	}
 
+	//로그아웃
 	@GetMapping("/customLogout")
 	public void logoutGET() {
 		log.info("custom logout");
