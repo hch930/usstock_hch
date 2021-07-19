@@ -60,3 +60,34 @@ table td {
 .bigPicture img{
 	width:600px;
 }
+
+.img-div{
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto
+	
+}
+.text-div{
+	text-align: center;
+	padding-right: 20px;
+	padding-left: 10px;
+}
+
+#likeBtn{
+	background-image: url('/resources/img/like.png'); 
+	background-color: transparent; 
+    background-repeat: no-repeat;  
+    border: solid 1px;            
+    height: 25px;           
+    padding-left: 25px;     
+    vertical-align: middle; 
+}
+#dislikeBtn{
+	background-image: url('/resources/img/dislike.png'); 
+	background-color: transparent; 
+    background-repeat: no-repeat;  
+    border: solid 1px;            
+    height: 25px;           
+    padding-left: 25px;     
+    vertical-align: middle; 
+}

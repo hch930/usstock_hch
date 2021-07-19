@@ -86,6 +86,21 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
+			<div class="img-div">
+				<button id="likeBtn"></button>
+				<button id="dislikeBtn"></button>
+			</div>
+			<div class="text-div">
+				<span style="color:blue;">100</span>&nbsp&nbsp&nbsp
+				<span style="color:red;">100</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
 			<div class="panel-heading">파일</div>
 			<div class="panel-body">
 				<div class="uploadResult">
