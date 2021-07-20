@@ -3,8 +3,6 @@ package org.hch.domain;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.cglib.core.TinyBitSet;
-
 import lombok.Getter;
 import lombok.Setter;
 

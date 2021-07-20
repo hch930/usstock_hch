@@ -6,7 +6,6 @@
 <head>
 <link rel="stylesheet" href="/resources/css/register.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?render=6LflxaobAAAAALOyYIIEW_nOWNUzHx4Z46A9yG4C"></script>
 <title>회원가입</title>
 <link rel="shortcut icon" href="/resources/img/favicon.ico">
 </head>
@@ -192,26 +191,6 @@ $('#userRepw').on("propertychange change keyup paste input", function(){
 		$('.pwck_input_re_2').css('display','block');
 		pwckcorCheck = false;
 	}
-});
-
-$(document).ready(function(){
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6LflxaobAAAAALOyYIIEW_nOWNUzHx4Z46A9yG4C', {action: 'login'}).then(function(token) {
-         console.log(token)
-         $.ajax({
-            url: '/login/register',
-            type : 'POST',
-            dataType: 'json',
-            data : {'token': token},
-            success : function(result){
-                console.log(result);
-            },
-            fail: function(e){
-                console.log("fail")
-            }
-          });// end ajax
-      });
-    });
 });
 </script>
 </body>
