@@ -2,7 +2,9 @@ package org.hch.controller;
 
 import org.hch.domain.AuthVO;
 import org.hch.domain.MemberVO;
+import org.hch.domain.RecaptchaDTO;
 import org.hch.service.MemberService;
+import org.hch.service.RecaptchaService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +26,8 @@ public class MemberController {
 	private final MemberService service;
 
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	private final RecaptchaService recaptchaService;
 
 	// 회원가입 GET
 	@GetMapping("/register")
@@ -31,7 +36,7 @@ public class MemberController {
 
 	// 회원가입 POST
 	@PostMapping("/register")
-	public String register(MemberVO vo) {
+	public String register(MemberVO vo, @RequestParam(value= "token") String token) {
 		log.info("register");
 		int result = service.idCheck(vo.getUserid());
 		try {
@@ -49,6 +54,8 @@ public class MemberController {
 		}catch(Exception e) {
 				throw new RuntimeException();
 		}
+		log.info(token);
+		recaptchaService.token(token);
 		return "redirect:/login/customLogin";
 	}
 
