@@ -1,5 +1,7 @@
 package org.hch.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hch.domain.AuthVO;
 import org.hch.domain.MemberVO;
 import org.hch.service.MemberService;
@@ -23,7 +25,7 @@ public class MemberController {
 	private final MemberService service;
 
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
-	
+
 	// 회원가입 GET
 	@GetMapping("/register")
 	public void register() {
@@ -31,23 +33,24 @@ public class MemberController {
 
 	// 회원가입 POST
 	@PostMapping("/register")
-	public String register(MemberVO vo) {
+	public String register(MemberVO vo, HttpServletRequest request) {
 		log.info("register");
 		int result = service.idCheck(vo.getUserid());
 		try {
-			if(result == 1) {
+			if (result == 1) {
 				return "/login/register";
-			}else if(result == 0) {
+			} else if (result == 0) {
+
 				vo.setUserpw(bcryptPasswordEncoder.encode(vo.getUserpw()));
 				service.register(vo);
-		
+
 				AuthVO auth = new AuthVO();
 				auth.setUserid(vo.getUserid());
 				auth.setAuth(auth.getAuth());
 				service.registerAuth(auth);
 			}
-		}catch(Exception e) {
-				throw new RuntimeException();
+		} catch (Exception e) {
+			throw new RuntimeException();
 		}
 		return "redirect:/login/customLogin";
 	}
@@ -68,7 +71,7 @@ public class MemberController {
 		}
 	}
 
-	//엑세스 에러
+	// 엑세스 에러
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
 		log.info("access Denied: " + auth);
@@ -76,7 +79,7 @@ public class MemberController {
 		model.addAttribute("msg", "Access denied");
 	}
 
-	//로그인
+	// 로그인
 	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error: " + error);
@@ -90,7 +93,7 @@ public class MemberController {
 		}
 	}
 
-	//로그아웃
+	// 로그아웃
 	@GetMapping("/customLogout")
 	public void logoutGET() {
 		log.info("custom logout");

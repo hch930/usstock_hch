@@ -155,3 +155,7 @@ h3 {
 		color : red;
 		display : none;	
 }
+.check_notRobot{
+	color: red;
+	display: none;
+}

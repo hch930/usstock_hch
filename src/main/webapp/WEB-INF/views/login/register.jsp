@@ -5,7 +5,9 @@
 <html>
 <head>
 <link rel="stylesheet" href="/resources/css/register.css">
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<c:set var="site_key" value="6Ld3nqsbAAAAAJ-0ZpYndVeLA0Ap-m3I3y0yXhQh"/>
 <title>회원가입</title>
 <link rel="shortcut icon" href="/resources/img/favicon.ico">
 </head>
@@ -54,8 +56,8 @@
 						<img src="/resources/img/lock.png" id="pswd2_img1" class="pswdImg">
 					</span> 
 					<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
-				<span class="pwck_input_re_1">비밀번호가 일치합니다.</span>
-				<span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
+					<span class="pwck_input_re_1">비밀번호가 일치합니다.</span>
+					<span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
 				</div>
 				<!-- NAME -->
 				<div>
@@ -67,6 +69,8 @@
 					</span> 
 					<span class="final_name_ck">이름을 입력해주세요.</span>
 				</div>
+				 <div class="g-recaptcha" data-sitekey="${site_key}"></div>
+				 <span class="check_notRobot">로봇이 아닙니다를 체크해주세요.</span>
 				<div class="btn_area">
 					<button id="btnJoin">
 						<span>가입</span>
@@ -91,7 +95,7 @@
 	var pwckCheck = false; // 비번 확인
 	var pwckcorCheck = false; // 비번 확인 일치 확인
 	var nameCheck = false; // 이름
-
+	
 	$(document).ready(function() {
 		// 취소
 		$("#btnCancel").on("click", function() {
@@ -140,7 +144,17 @@
 			}else{
 				$('.final_name_ck').css('display', 'none');
 				nameCheck = true;
-			}	
+			}
+			
+			var v = grecaptcha.getResponse(); //recaptcha 체크 확인
+			
+			if (v.length ==0) {
+				$('.check_notRobot').css('display','block');
+				return false;
+			} else {
+				$('.check_notRobot').css('display','none');
+				return true;
+			}
 			
 			if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck){
 				$("#regForm").submit();
