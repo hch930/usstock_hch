@@ -91,7 +91,8 @@
 				<button id="dislikeBtn"></button>
 			</div>
 			<div class="text-div">
-				<span style="color:blue;">100</span>&nbsp&nbsp&nbsp
+				<span style="color:blue;">100</span>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				<span style="color:red;">100</span>
 			</div>
 		</div>

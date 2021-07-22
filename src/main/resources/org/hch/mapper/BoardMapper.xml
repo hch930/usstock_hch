@@ -113,6 +113,17 @@ where rn > (#{pageNum}-1) * #{amount} and deleteYn = 'N'
     	UPDATE tbl_board SET
     	HIT = HIT+1
     	WHERE BNO = #{bno}
-    </update>
+</update>
 
+<update id="boardLike" parameterType="Long">
+    	UPDATE tbl_board SET
+    	LIKES = LIKES+1
+    	WHERE BNO = #{bno}
+</update>
+
+<update id="boardDisLike" parameterType="Long">
+    	UPDATE tbl_board SET
+    	DISLIKE = DISLIKE+1
+    	WHERE BNO = #{bno}
+</update>
 </mapper>

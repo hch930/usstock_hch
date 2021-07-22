@@ -85,6 +85,13 @@ commit;
 -----------------------------------board 테이블에 delete 컬럼 추가 -------------------------------------------
 alter table tbl_board add(deleteYn char(1) default 'N');
 commit;
+
+-----------------------------------board 테이블에 추천수 컬럼 추가 ------------------------------------
+alter table tbl_board add(likes number default 0);
+commit;
+-----------------------------------board 테이블에 비추천수 컬럼 추가 ------------------------------------
+alter table tbl_board add(dislike number default 0);
+commit;
 ---------------------------------------------------- 삭제  ----------------------------------------------------------
 
 drop table tbl_board;
