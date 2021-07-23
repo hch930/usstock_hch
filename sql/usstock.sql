@@ -1,3 +1,4 @@
+https://shxrecord.tistory.com/6
 create sequence seq_board;
 
 create table tbl_board(
