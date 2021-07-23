@@ -125,4 +125,6 @@ public class BoardController {
 		log.info("getAttachList " + + bno);
 		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK); 
 	}
+	
+	
 }

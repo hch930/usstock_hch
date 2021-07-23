@@ -91,9 +91,9 @@
 				<button id="dislikeBtn"></button>
 			</div>
 			<div class="text-div">
-				<span style="color:blue;">100</span>
-				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-				<span style="color:red;">100</span>
+				<c:out value="1"/>  
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				<c:out value="2"/> 
 			</div>
 		</div>
 	</div>
@@ -508,6 +508,10 @@ $(".uploadResult").on("click","li", function(e){
     }, 1000);
   });
   
+</script>
+
+<script type="text/javascript">
+
 </script>
 
 <%@include file="../includes/footer.jsp"%>
