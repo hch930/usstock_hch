@@ -26,8 +26,4 @@ public interface BoardMapper {
 	public void updateReplyCnt(@Param("bno")Long bno, @Param("amount")int amount);
 	
 	public void boardHit(Long bno);
-	
-	public void boardLike(Long bno);
-	
-	public void boardDisLike(Long bno);
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hch.mapper.LikeMapper">
+	<select id="likecount" resultType="Integer" parameterType="org.hch.domain.LikeVO">
+		select count(likes) from tbl_like where userid=#{userid} and bno=#{bno}
+	</select>
+	
+	<insert id="likeinsert" parameterType="org.hch.domain.LikeVO">
+		insert into tbl_like(userid,bno)
+		values (#{userid},#{bno})
+	</insert>
+	
+	<select id="likegetinfo" resultType="Integer" parameterType="org.hch.domain.LikeVO">
+		select likes from tbl_like where userid=#{userid} and bno=#{bno}
+	</select>
+	
+	<update id="likeupdate" parameterType="org.hch.domain.LikeVO">
+		update tbl_like
+		set <include refid="cal"></include>
+		where userid=#{userid} and bno=#{bno}
+	</update>
+	
+	<sql id="cal">
+		<if test="count == 1">
+			likes = 0
+		</if> 
+		
+		<if test="count == 0">
+			likes = likes + 1 
+		</if>
+	</sql>
+</mapper>

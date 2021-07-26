@@ -71,7 +71,7 @@ table td {
 	text-align: center;
 }
 
-#likeBtn{
+.likeBtn{
 	background-image: url('/resources/img/like.png'); 
 	background-color: transparent; 
     background-repeat: no-repeat;  
@@ -81,7 +81,7 @@ table td {
     padding-left: 25px;     
     vertical-align: middle; 
 }
-#dislikeBtn{
+.dislikeBtn{
 	background-image: url('/resources/img/dislike.png'); 
 	background-color: transparent; 
     background-repeat: no-repeat;  

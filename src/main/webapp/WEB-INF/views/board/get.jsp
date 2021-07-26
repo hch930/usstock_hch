@@ -87,13 +87,19 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="img-div">
-				<button id="likeBtn"></button>
-				<button id="dislikeBtn"></button>
-			</div>
-			<div class="text-div">
-				<c:out value="1"/>  
-				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-				<c:out value="2"/> 
+			<c:choose>
+				<c:when test="${likes ==0}">
+					<button class="likeBtn"></button>
+					<span style="color:blue;" id="likecount">100</span>
+				</c:when>
+				<c:when test="${likes ==1}">
+					<button class="likeBtn"></button>
+					<span id="likecount">100</span>
+				</c:when>
+			</c:choose>
+			<input type="hidden" id="userid" name="userid" value='<c:out value="${member}"/>'> 
+				<button class="dislikeBtn"></button>
+				<span id="dislikecount">200</span>
 			</div>
 		</div>
 	</div>
@@ -511,7 +517,40 @@ $(".uploadResult").on("click","li", function(e){
 </script>
 
 <script type="text/javascript">
+$('.likeBtn').click(function(){
+	likeupdate();
+});
 
+function likeupdate(){
+	userid = $('#userid').val(),
+	bno = $('#bno').val(),
+	count = $('#likecount').val(),
+	data = {"userid" : userid,
+			"bno" : bno,
+			"count" : count};
+	
+$.ajax({
+	url :"/like/likeupdate",
+	type : 'PUT',
+	contentType: 'application/json',
+	data : JSON.stringify(data),
+	success : function(result){
+		console.log("수정" + result.result);
+		if(count == 1){
+			console.log("좋아요 취소");
+			 $('#likecount').val(0);
+			 $('#likecount').attr('style','color:black');
+		}else if(count == 0){
+			console.log("좋아요!");
+			$('#likecount').val(1);
+			$('#likecount').attr('style','color:blue');
+		}
+	}, error : function(result){
+		console.log("에러" + result.result)
+	}
+	
+	});
+};
 </script>
 
 <%@include file="../includes/footer.jsp"%>

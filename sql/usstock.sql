@@ -87,12 +87,15 @@ commit;
 alter table tbl_board add(deleteYn char(1) default 'N');
 commit;
 
------------------------------------board 테이블에 추천수 컬럼 추가 ------------------------------------
-alter table tbl_board add(likes number default 0);
-commit;
------------------------------------board 테이블에 비추천수 컬럼 추가 ------------------------------------
-alter table tbl_board add(dislike number default 0);
-commit;
+-----------------------------------like 테이블 생성 ------------------------------------
+create table tbl_like(
+	userid varchar2(50) not null,
+	bno number(10,0) not null,
+	likes number default 0,
+	dislike number default 0,
+	foreign key(userid) references tbl_member(userid),
+	foreign key(bno) references tbl_board(bno)
+)
 ---------------------------------------------------- 삭제  ----------------------------------------------------------
 
 drop table tbl_board;
@@ -101,3 +104,5 @@ drop table tbl_attach;
 
 drop sequence seq_board;
 drop sequence seq_reply;
+
+alter table tbl_board drop column dislike;

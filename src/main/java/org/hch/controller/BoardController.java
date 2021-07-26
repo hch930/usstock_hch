@@ -3,17 +3,24 @@ package org.hch.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 import org.hch.domain.BoardAttachVO;
 import org.hch.domain.BoardVO;
 import org.hch.domain.Criteria;
+import org.hch.domain.LikeVO;
 import org.hch.domain.PageDTO;
 import org.hch.service.BoardService;
+import org.hch.service.LikeService;
+import org.hch.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,15 +30,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
 @RequestMapping("/board/*")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BoardController {
-	private BoardService service;
+	private final BoardService service;
+	private final LikeService likeService;
+	private final MemberService memberService;
+	
+	public static String currentUserName() { 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
+		User user = (User) authentication.getPrincipal(); 
+		return user.getUsername(); 
+	}
 	
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
@@ -64,9 +79,28 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping({"/get","/modify"})
-	public void get(Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
-		log.info("/get or /modify");
+	@GetMapping("/get")
+	public void get(Long bno, @ModelAttribute("cri") Criteria cri, Model model, Principal principal) {
+		log.info("/get");
+		LikeVO likevo = new LikeVO();
+		likevo.setBno(bno);
+		likevo.setUserid(currentUserName());
+		
+		int likes = 0;
+		int check = likeService.likecount(likevo);
+		if(check == 0) {
+			likeService.likeinsert(likevo);
+		}else if(check == 1) {
+			likes = likeService.likegetinfo(likevo);
+		}
+		model.addAttribute("member", principal.getName());
+		model.addAttribute("likes", likes);
+		model.addAttribute("board", service.get(bno));
+	}
+	
+	@GetMapping("/modify")
+	public void modify(Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info("/modify");
 		model.addAttribute("board", service.get(bno));
 	}
 	
