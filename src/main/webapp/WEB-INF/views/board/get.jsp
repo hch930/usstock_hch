@@ -90,11 +90,11 @@
 			<c:choose>
 				<c:when test="${likes ==0}">
 					<button class="likeBtn"></button>
-					<span style="color:blue;" id="likecount">100</span>
+					<span style="color:blue;" id="likecount">${likes}</span>
 				</c:when>
 				<c:when test="${likes ==1}">
 					<button class="likeBtn"></button>
-					<span id="likecount">100</span>
+					<span id="likecount">${likes}</span>
 				</c:when>
 			</c:choose>
 			<input type="hidden" id="userid" name="userid" value='<c:out value="${member}"/>'> 
