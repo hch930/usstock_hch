@@ -2,7 +2,6 @@ package org.hch.service;
 
 import org.hch.domain.LikeVO;
 import org.hch.mapper.LikeMapper;
-import org.hch.mapper.MemberMapper;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,25 @@ public class LikeService {
 		likeMapper.likeinsert(likevo);
 	}
 	
-	public void likeupdate(LikeVO likevo) {
+	public int likeupdate(LikeVO likevo) {
 		likeMapper.likeupdate(likevo);
+		return likevo.getAlldislike();
+	}
+	
+	public int dislikecount(LikeVO likevo) {
+		return likeMapper.dislikecount(likevo);
+	}
+	
+	public int dislikegetinfo(LikeVO likevo) {
+		return likeMapper.dislikegetinfo(likevo);
+	}
+	
+	public void dislikeinsert(LikeVO likevo) {
+		likeMapper.dislikeinsert(likevo);
+	}
+	
+	public int dislikeupdate(LikeVO likevo) {
+		likeMapper.dislikeupdate(likevo);
+		return likevo.getAlldislike();
 	}
 }

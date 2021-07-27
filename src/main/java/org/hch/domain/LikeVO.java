@@ -12,5 +12,7 @@ public class LikeVO {
 	private Long bno;
 	private int likes;
 	private int dislike;
+	private int alllike;
+	private int alldislike;
 	private int count;
 }

@@ -32,6 +32,7 @@
 								<th>작성일</th>
 								<th>ip주소</th>
 								<th>조회수</th>
+								<th>추천수</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -57,6 +58,7 @@
 									</td>
 									<td><c:out value="${board.ipAddress}" /></td>
 									<td><c:out value="${board.hit}"/></td>
+									<td><c:out value="${board.blike}"/></td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -52,7 +52,6 @@
 						<label>조회수</label> <input class="form-control" name="hit"
 							value='<c:out value="${board.hit}"/>' readonly="readonly">
 					</div>
-
 					<input type="hidden" name="pageNum"
 						value='<c:out value="${cri.pageNum}"/>'> <input
 						type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
@@ -90,16 +89,28 @@
 			<c:choose>
 				<c:when test="${likes ==0}">
 					<button class="likeBtn"></button>
-					<span style="color:blue;" id="likecount">${likes}</span>
+					<input type="hidden" id="likecheck" value="${likes}">
+					<span id="likecount">${board.blike}</span>
 				</c:when>
 				<c:when test="${likes ==1}">
 					<button class="likeBtn"></button>
-					<span id="likecount">${likes}</span>
+					<input type="hidden" id="likecheck" value="${likes}">
+					<span id="likecount">${board.blike}</span>
+				</c:when>
+			</c:choose>
+			<c:choose>
+				<c:when test="${dislike ==0}">
+					<button class="dislikeBtn"></button>
+					<input type="hidden" id="dislikecheck" value="${dislike}">
+					<span id="dislikecount">${board.bdislike}</span>
+				</c:when>
+				<c:when test="${dislike ==1}">
+					<button class="dislikeBtn"></button>
+					<input type="hidden" id="dislikecheck" value="${dislike}">
+					<span id="dislikecount">${board.bdislike}</span>
 				</c:when>
 			</c:choose>
 			<input type="hidden" id="userid" name="userid" value='<c:out value="${member}"/>'> 
-				<button class="dislikeBtn"></button>
-				<span id="dislikecount">200</span>
 			</div>
 		</div>
 	</div>
@@ -524,26 +535,65 @@ $('.likeBtn').click(function(){
 function likeupdate(){
 	userid = $('#userid').val(),
 	bno = $('#bno').val(),
-	count = $('#likecount').val(),
+	count = $('#likecheck').val(),
 	data = {"userid" : userid,
 			"bno" : bno,
 			"count" : count};
 	
 $.ajax({
 	url :"/like/likeupdate",
-	type : 'PUT',
-	contentType: 'application/json',
+	type : 'POST',
+	dataType: "json",
+	contentType: 'application/json; charset=utf-8',
 	data : JSON.stringify(data),
 	success : function(result){
-		console.log("수정" + result.result);
+		console.log("성공" + result.result)
+		console.log("수정" + result.like);
 		if(count == 1){
 			console.log("좋아요 취소");
-			 $('#likecount').val(0);
-			 $('#likecount').attr('style','color:black');
+			 $('#likecheck').val(0);
+			 $('#likecount').html(result.like);
 		}else if(count == 0){
 			console.log("좋아요!");
-			$('#likecount').val(1);
-			$('#likecount').attr('style','color:blue');
+			$('#likecheck').val(1);
+			$('#likecount').html(result.like);
+		}
+	}, error : function(result){
+		console.log("에러" + result.result)
+	}
+	
+	});
+};
+
+$('.dislikeBtn').click(function(){
+	dislikeupdate();
+});
+
+function dislikeupdate(){
+	userid = $('#userid').val(),
+	bno = $('#bno').val(),
+	count = $('#dislikecheck').val(),
+	data = {"userid" : userid,
+			"bno" : bno,
+			"count" : count};
+	
+$.ajax({
+	url :"/like/dislikeupdate",
+	type : 'POST',
+	dataType: "json",
+	contentType: 'application/json; charset=utf-8',
+	data : JSON.stringify(data),
+	success : function(result){
+		console.log("싫어요 성공" + result.result)
+		console.log("싫어요 수정" + result.dislike);
+		if(count == 1){
+			console.log("싫어요 취소");
+			 $('#dislikecheck').val(0);
+			 $('#dislikecount').html(result.dislike);
+		}else if(count == 0){
+			console.log("싫어요!");
+			$('#dislikecheck').val(1);
+			$('#dislikecount').html(result.dislike);
 		}
 	}, error : function(result){
 		console.log("에러" + result.result)

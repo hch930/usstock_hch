@@ -87,6 +87,11 @@ commit;
 alter table tbl_board add(deleteYn char(1) default 'N');
 commit;
 
+alter table tbl_board add(blike number default 0);
+commit;
+
+alter table tbl_board drop column blike;
+
 -----------------------------------like 테이블 생성 ------------------------------------
 create table tbl_like(
 	userid varchar2(50) not null,
@@ -96,6 +101,9 @@ create table tbl_like(
 	foreign key(userid) references tbl_member(userid),
 	foreign key(bno) references tbl_board(bno)
 )
+
+alter table tbl_like add(alllike number default 0);
+commit;
 ---------------------------------------------------- 삭제  ----------------------------------------------------------
 
 drop table tbl_board;

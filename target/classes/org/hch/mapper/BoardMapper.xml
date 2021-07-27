@@ -6,7 +6,9 @@
 
 <select id="getList" resultType="org.hch.domain.BoardVO">
 <![CDATA[
-select * from tbl_board where bno > 0 and deleteYn = 'N'
+select bno, title, writer, regdate, ipaddress, replycnt, hit, 
+(select count(likes) from tbl_like where bno=bno and likes=1)as blike
+from tbl_board where bno > 0 and deleteYn = 'N'
 ]]>
 </select>
 
@@ -33,10 +35,12 @@ select * from tbl_board where bno > 0 and deleteYn = 'N'
 <select id="getListWithPaging" resultType="org.hch.domain.BoardVO">
 <![CDATA[
 select
-  bno, title, content, writer, regdate, updatedate, ipaddress, replycnt, hit, deleteYn
+  bno, title, content, writer, regdate, updatedate, ipaddress, replycnt, hit, 
+  (select count(likes) from tbl_like where bno=bno and likes=1)as blike, deleteYn
 from
 (select /*+INDEX_DESC(tbl_board pk_board) */
-rownum rn, bno, title, content, writer, regdate, updatedate, ipaddress, replycnt, hit, deleteYn
+rownum rn, bno, title, content, writer, regdate, updatedate, ipaddress, replycnt, hit, 
+(select count(likes) from tbl_like where bno=bno and likes=1)as blike, deleteYn
 from tbl_board
 where
 ]]>
@@ -87,7 +91,10 @@ where rn > (#{pageNum}-1) * #{amount} and deleteYn = 'N'
 </insert>
 
 <select id="read" resultType="org.hch.domain.BoardVO">
-	select * from tbl_board where bno = #{bno} and deleteYn = 'N'
+	select bno,title,content,writer,ipaddress,hit, 
+	(select count(likes) from tbl_like where bno=bno and likes=1)as blike,
+	(select count(dislike) from tbl_like where bno=bno and dislike=1)as bdislike
+	 from tbl_board where bno = #{bno} and deleteYn = 'N'
 </select>
 
 <update id="update">

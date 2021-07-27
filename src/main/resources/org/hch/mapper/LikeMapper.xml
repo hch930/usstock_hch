@@ -18,8 +18,12 @@
 	
 	<update id="likeupdate" parameterType="org.hch.domain.LikeVO">
 		update tbl_like
-		set <include refid="cal"></include>
+		set <include refid="cal"/>
 		where userid=#{userid} and bno=#{bno}
+		
+		<selectKey keyProperty="alllike" order="AFTER" resultType="Integer">
+			select count(likes) from tbl_like where bno=#{bno} and likes=1
+		</selectKey>
 	</update>
 	
 	<sql id="cal">
@@ -29,6 +33,39 @@
 		
 		<if test="count == 0">
 			likes = likes + 1 
+		</if>
+	</sql>
+	
+	<select id="dislikecount" resultType="Integer" parameterType="org.hch.domain.LikeVO">
+		select count(dislike) from tbl_like where userid=#{userid} and bno=#{bno}
+	</select>
+	
+	<insert id="dislikeinsert" parameterType="org.hch.domain.LikeVO">
+		insert into tbl_like(userid,bno)
+		values (#{userid},#{bno})
+	</insert>
+	
+	<select id="dislikegetinfo" resultType="Integer" parameterType="org.hch.domain.LikeVO">
+		select dislike from tbl_like where userid=#{userid} and bno=#{bno}
+	</select>
+	
+	<update id="dislikeupdate" parameterType="org.hch.domain.LikeVO">
+		update tbl_like
+		set <include refid="discal"/>
+		where userid=#{userid} and bno=#{bno}
+		
+		<selectKey keyProperty="alldislike" order="AFTER" resultType="Integer">
+			select count(dislike) from tbl_like where bno=#{bno} and dislike=1
+		</selectKey>
+	</update>
+	
+	<sql id="discal">
+		<if test="count == 1">
+			dislike = 0
+		</if> 
+		
+		<if test="count == 0">
+			dislike = dislike + 1 
 		</if>
 	</sql>
 </mapper>

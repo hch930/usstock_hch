@@ -18,6 +18,8 @@ public class BoardVO {
 	private String ipAddress;//아이피주소
 	private int hit;		//조회수
 	private char deleteYn; //삭제여부
+	private int blike; 		//좋아요 총 개수
+	private int bdislike;	//싫어요 총 개수
 	
 	private int replyCnt;	//댓글수
 	

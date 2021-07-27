@@ -13,7 +13,6 @@ import org.hch.domain.LikeVO;
 import org.hch.domain.PageDTO;
 import org.hch.service.BoardService;
 import org.hch.service.LikeService;
-import org.hch.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,6 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	private final BoardService service;
 	private final LikeService likeService;
-	private final MemberService memberService;
 	
 	public static String currentUserName() { 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
@@ -93,8 +91,17 @@ public class BoardController {
 		}else if(check == 1) {
 			likes = likeService.likegetinfo(likevo);
 		}
+		
+		int dislike = 0;
+		int checkDis = likeService.dislikecount(likevo);
+		if(checkDis == 0) {
+			likeService.dislikeinsert(likevo);
+		}else if(checkDis == 1) {
+			dislike = likeService.dislikegetinfo(likevo);
+		}
 		model.addAttribute("member", principal.getName());
 		model.addAttribute("likes", likes);
+		model.addAttribute("dislike", dislike);
 		model.addAttribute("board", service.get(bno));
 	}
 	

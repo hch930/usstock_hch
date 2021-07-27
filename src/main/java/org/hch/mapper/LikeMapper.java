@@ -9,5 +9,13 @@ public interface LikeMapper {
 	
 	public void likeinsert(LikeVO likevo);
 	
-	public void likeupdate(LikeVO likevo);
+	public int likeupdate(LikeVO likevo);
+	
+	public int dislikecount(LikeVO likevo);
+	
+	public int dislikegetinfo(LikeVO likevo);
+	
+	public void dislikeinsert(LikeVO likevo);
+	
+	public int dislikeupdate(LikeVO likevo);
 }
