@@ -90,24 +90,24 @@
 				<c:when test="${likes ==0}">
 					<button class="likeBtn"></button>
 					<input type="hidden" id="likecheck" value="${likes}">
-					<span id="likecount">${board.blike}</span>
+					<span id="likecount">${likes}</span>
 				</c:when>
 				<c:when test="${likes ==1}">
 					<button class="likeBtn"></button>
 					<input type="hidden" id="likecheck" value="${likes}">
-					<span id="likecount">${board.blike}</span>
+					<span id="likecount">${likes}</span>
 				</c:when>
 			</c:choose>
 			<c:choose>
 				<c:when test="${dislike ==0}">
 					<button class="dislikeBtn"></button>
 					<input type="hidden" id="dislikecheck" value="${dislike}">
-					<span id="dislikecount">${board.bdislike}</span>
+					<span id="dislikecount">${dislike}</span>
 				</c:when>
 				<c:when test="${dislike ==1}">
 					<button class="dislikeBtn"></button>
 					<input type="hidden" id="dislikecheck" value="${dislike}">
-					<span id="dislikecount">${board.bdislike}</span>
+					<span id="dislikecount">${dislike}</span>
 				</c:when>
 			</c:choose>
 			<input type="hidden" id="userid" name="userid" value='<c:out value="${member}"/>'> 

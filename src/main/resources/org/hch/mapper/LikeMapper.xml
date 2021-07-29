@@ -29,8 +29,7 @@
 	<sql id="cal">
 		<if test="count == 1">
 			likes = 0
-		</if> 
-		
+		</if>
 		<if test="count == 0">
 			likes = likes + 1 
 		</if>
@@ -62,8 +61,7 @@
 	<sql id="discal">
 		<if test="count == 1">
 			dislike = 0
-		</if> 
-		
+		</if>
 		<if test="count == 0">
 			dislike = dislike + 1 
 		</if>
